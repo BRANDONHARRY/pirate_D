@@ -118,7 +118,9 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     </div>
 
     <div class="bottom">
+        <a href="stats.php" class="btn btn-primary">Submit a score</a>
         <a href="password_reset.php" class="btn btn-dark">Reset Your Password</a>
+        <a href="edit_account.php" class="btn btn-warning">Change account details</a>
         <a href="logout.php" class="btn btn-danger">Sign Out of Your Account</a>
     </div>
 </div>

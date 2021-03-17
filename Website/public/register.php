@@ -312,4 +312,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 </div>
 
 </body>
+
+<footer class="footer">
+    <div class="container">
+            <span class="text-muted">Created by COMP2003 Group_D. Link to Github:
+            <a href="https://github.com/BRANDONHARRY/COMP2003_pirate_D">https://github.com/BRANDONHARRY/COMP2003_pirate_D</a></span>
+    </div>
+</footer>
+
 </html>

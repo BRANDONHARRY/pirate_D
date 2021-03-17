@@ -51,7 +51,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                 session_destroy();
                 header("location: login.php");
             } else{
-              echo ("Something went wrong try again.");
+                echo ("Something went wrong try again.");
             }
             mysqli_stmt_close();
         }
@@ -67,7 +67,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <title>Pirates Treasure - Reset password</title>
+    <title>Pirates Treasure - Edit account</title>
 
     <style>
         .form{
@@ -85,7 +85,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             line-height: 60px;
             background-color: #343a40;
         }
-
     </style>
 </head>
 
@@ -120,7 +119,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         </ul>
         <ul class="navbar-nav mt-2 mt-lg-0">
             <li class="nav-item active">
-                <a class="nav-link" href="password_reset.php">Reset password</a>
+                <a class="nav-link" href="edit_account.php">Edit account</a>
             </li>
         </ul>
         <ul class="navbar-nav mt-2 mt-lg-0">
@@ -138,8 +137,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <div class="container d-flex align-items-center flex-column text-center">
     <div class="form">
-        <h2>Reset Password</h2>
-        <p>Please fill out this form to reset your password.</p>
+        <h2>Edit Account</h2>
+        <p>Please change the areas you want to change</p>
 
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <div class="form-group
