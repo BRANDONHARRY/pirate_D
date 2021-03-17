@@ -26,20 +26,11 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="55a90b99-f2c2-4e2a-b5a2-fc6ca339c588" name="Default Changelist" comment="Register page has been fully updated to validate email before new user.">
-      <change afterPath="$PROJECT_DIR$/Website/public/config.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Website/public/logout.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Website/public/password_reset.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Website/public/welcome.php" afterDir="false" />
+    <list default="true" id="55a90b99-f2c2-4e2a-b5a2-fc6ca339c588" name="Default Changelist" comment="Register page now hashes the password in insert. Login system all working with sessions remembering if you are logged in. A welcome page for the account details has been started. Inside of this there is a logout system as well as a password reset option.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Website/public/about_us.php" beforeDir="false" afterPath="$PROJECT_DIR$/Website/public/about_us.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Website/public/contact_us.php" beforeDir="false" afterPath="$PROJECT_DIR$/Website/public/contact_us.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Website/public/download.php" beforeDir="false" afterPath="$PROJECT_DIR$/Website/public/download.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Website/public/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/Website/public/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Website/public/leaderboard.php" beforeDir="false" afterPath="$PROJECT_DIR$/Website/public/leaderboard.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Website/public/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/Website/public/login.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Website/public/news.php" beforeDir="false" afterPath="$PROJECT_DIR$/Website/public/news.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Website/public/register.php" beforeDir="false" afterPath="$PROJECT_DIR$/Website/public/register.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Website/public/welcome.php" beforeDir="false" afterPath="$PROJECT_DIR$/Website/public/welcome.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -116,7 +107,9 @@
       <workItem from="1614174965557" duration="10726000" />
       <workItem from="1614186009404" duration="292000" />
       <workItem from="1614780171454" duration="5826000" />
-      <workItem from="1615379650478" duration="11540000" />
+      <workItem from="1615379650478" duration="12381000" />
+      <workItem from="1615821885379" duration="14000" />
+      <workItem from="1615989817756" duration="7222000" />
     </task>
     <task id="LOCAL-00001" summary="Website file structure">
       <created>1605104557576</created>
@@ -223,7 +216,14 @@
       <option name="project" value="LOCAL" />
       <updated>1614185858294</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Register page now hashes the password in insert. Login system all working with sessions remembering if you are logged in. A welcome page for the account details has been started. Inside of this there is a logout system as well as a password reset option.">
+      <created>1615391921863</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1615391921863</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -268,6 +268,7 @@
     <MESSAGE value="Change layout of webpages added basic csv file." />
     <MESSAGE value="Leaderboard updated to display from database" />
     <MESSAGE value="register.php file created to create a new user in the system. This is then inputting these details into the database." />
-    <option name="LAST_COMMIT_MESSAGE" value="register.php file created to create a new user in the system. This is then inputting these details into the database." />
+    <MESSAGE value="Register page now hashes the password in insert. Login system all working with sessions remembering if you are logged in. A welcome page for the account details has been started. Inside of this there is a logout system as well as a password reset option." />
+    <option name="LAST_COMMIT_MESSAGE" value="Register page now hashes the password in insert. Login system all working with sessions remembering if you are logged in. A welcome page for the account details has been started. Inside of this there is a logout system as well as a password reset option." />
   </component>
 </project>

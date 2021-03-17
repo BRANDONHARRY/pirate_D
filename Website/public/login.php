@@ -32,9 +32,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Validate credentials
     if (empty($email_err) && empty($password_err)) {
-        $query = "SELECT userID, email, password FROM comp2003_d.usertbl WHERE email = ?";
+        $query = "SELECT userID, firstName, lastName, username, email, password FROM comp2003_d.usertbl WHERE email = ?";
 
-        if ($stmt = mysqli_prepare($con, "SELECT userID, email, password  FROM comp2003_d.usertbl WHERE email = ?")) {
+        if ($stmt = mysqli_prepare($con, $query)) {
             mysqli_stmt_bind_param($stmt, "s", $checkEmail);
 
             // Set parameters
@@ -44,7 +44,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                 mysqli_stmt_store_result($stmt);
 
                 if (mysqli_stmt_num_rows($stmt) > 0) {
-                    mysqli_stmt_bind_result($stmt, $userID, $email, $hashed_password);
+                    mysqli_stmt_bind_result($stmt, $userID, $firstName, $lastName, $username, $email, $hashed_password);
 
                     if (mysqli_stmt_fetch($stmt)) {
                         if (password_verify($password, $hashed_password)) {
@@ -53,8 +53,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
                             // Store data in session variables
                             $_SESSION["loggedin"] = true;
-                            $_SESSION["id"] = $userID;
+                            $_SESSION["userID"] = $userID;
+                            $_SESSION["firstName"] = $firstName;
+                            $_SESSION["lastName"] = $lastName;
+                            $_SESSION["username"] = $username;
                             $_SESSION["email"] = $email;
+
 
                             // Redirect user to welcome page
                             header("location: welcome.php");
@@ -170,7 +174,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div class="form-group
                         <?php echo (!empty($email_err)) ? 'has-error' : ''; ?>">
                         <label>Email</label>
-                        <input type="text" name="email" class="form-control" value="<?php echo $email; ?>">
+                        <input type="email" name="email" class="form-control" value="<?php echo $email; ?>">
 
                         <span class="help-block">
                             <?php echo $email_err; ?>

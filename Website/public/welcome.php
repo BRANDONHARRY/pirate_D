@@ -14,24 +14,9 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-
     <title>Pirates Treasure - Login</title>
 
     <style>
-        .form{
-            border-radius: 35px;
-            background-color: #f2f2f2;
-            padding: 20px;
-            width: 70%;
-            margin-top: 50px;
-        }
-        .header {
-            padding: 80px;
-            text-align: center;
-            color: white;
-            background-size:100% 100%;
-            background-image: url("../assets/img/Game.png");
-        }
         .footer {
             position: absolute;
             bottom: 0;
@@ -39,6 +24,10 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
             height: 60px;
             line-height: 60px;
             background-color: #343a40;
+        }
+        .bottom{
+            position: absolute;
+            bottom: 65px;
         }
     </style>
 </head>
@@ -90,11 +79,50 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 </nav>
 
 <div class="container d-flex align-items-center flex-column text-center">
-    <h1>Welcome to your account </h1>
-    <a href="password_reset.php" class="btn btn-dark">Reset Your Password</a>
-    <a href="logout.php" class="btn btn-danger">Sign Out of Your Account</a>
+    <h1>Welcome to your account</h1>
+    <h4 class="font-weight-bold mb-0">
+        <?php echo $_SESSION["firstName"] . " " . $_SESSION["lastName"]?>
+        <span class="text-muted font-weight-normal">
+            <?php echo "@" . $_SESSION["username"]?>
+        </span>
+    </h4>
 
+    <p></p>
+
+    <div class="card mb-4">
+        <div class="card-body">
+            <table class="table user-view-table m-0">
+                <tbody>
+                <tr>
+                    <td class="font-weight-bold mb-0">First name:</td>
+                    <td><?php echo $_SESSION["firstName"]?></td>
+                </tr>
+
+                <tr>
+                    <td class="font-weight-bold mb-0">Last Name:</td>
+                    <td><?php echo $_SESSION["lastName"]?></td>
+                </tr>
+
+                <tr>
+                    <td class="font-weight-bold mb-0">User Name:</td>
+                    <td><?php echo $_SESSION["username"]?></td>
+                </tr>
+
+                <tr>
+                    <td class="font-weight-bold mb-0">Email:</td>
+                    <td><?php echo $_SESSION["email"]?></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="bottom">
+        <a href="password_reset.php" class="btn btn-dark">Reset Your Password</a>
+        <a href="logout.php" class="btn btn-danger">Sign Out of Your Account</a>
+    </div>
 </div>
+
 </body>
 
 <footer class="footer">

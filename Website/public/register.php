@@ -239,7 +239,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <div class="form-group
                 <?php echo (!empty($email_err)) ? 'has-error' : ''; ?>">
                 <label>Email</label>
-                <input type="text" name="email" class="form-control" value="">
+                <input type="email" name="email" class="form-control" value="">
 
                 <span class="help-block">
                     <?php echo $email_err; ?>
