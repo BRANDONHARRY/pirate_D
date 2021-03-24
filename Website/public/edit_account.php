@@ -149,38 +149,66 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <div class="container d-flex align-items-center flex-column text-center">
     <div class="form">
-        <h2>Edit Account</h2>
-        <p>Please change the areas you want to change</p>
+        <h2>Enter the areas you want to change</h2>
 
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+
             <div class="form-group
-                <?php echo (!empty($new_password_err)) ? 'has-error' : ''; ?>">
-                <label>New Password</label>
-                <input type="password" name="new_password" class="form-control" value="<?php echo $new_password; ?>">
+                <?php echo (!empty($email_err)) ? 'has-error' : ''; ?>">
+                <label>Email</label>
+                <input type="email" name="email" class="form-control" value="<?php session_start(); echo $_SESSION["email"]?>">
 
                 <span class="help-block">
-                    <?php echo $new_password_err; ?>
+                    <?php echo $email_err; ?>
                 </span>
             </div>
 
             <div class="form-group
-                <?php echo (!empty($confirm_password_err)) ? 'has-error' : ''; ?>">
-                <label>Confirm Password</label>
-                <input type="password" name="confirm_password" class="form-control">
+                <?php echo (!empty($firstName_err)) ? 'has-error' : ''; ?>">
+                <label>First Name</label>
+                <input type="text" name="firstname" class="form-control" value="<?php session_start(); echo $_SESSION["firstName"]?>">
 
                 <span class="help-block">
-                    <?php echo $confirm_password_err; ?>
+                    <?php echo $firstName_err; ?>
+                </span>
+            </div>
+
+            <div class="form-group
+                <?php echo (!empty($lastName_err)) ? 'has-error' : ''; ?>">
+                <label>Last Name</label>
+                <input type="text" name="lastname" class="form-control" value="<?php session_start(); echo $_SESSION["lastName"]?>">
+
+                <span class="help-block">
+                    <?php echo $lastName_err; ?>
+                </span>
+            </div>
+
+            <div class="form-group
+                <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
+                <label>Username</label>
+                <input type="text" name="username" class="form-control" value="<?php session_start(); echo $_SESSION["username"]?>">
+
+                <span class="help-block">
+                    <?php echo $username_err; ?>
                 </span>
             </div>
 
             <div class="form-group">
-                <input type="submit" class="btn btn-primary" value="Submit">
-                <a class="btn btn-link" href="welcome.php">Cancel</a>
+                <input name="submitBtn "type="submit" class="btn btn-primary" value="Submit">
+                <input type="reset" class="btn btn-primary" value="Reset">
             </div>
+
+            <a href="login.php">Cancel</a>
+
         </form>
     </div>
 </div>
 </div>
+
+
+
+
+
 </body>
 
 <footer class="footer">
