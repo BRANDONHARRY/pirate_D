@@ -8,46 +8,49 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 
 require_once  "config.php";
 
-$new_password = "";
-$confirm_password = "";
-$new_password_err = "";
-$confirm_password_err = "";
+$new_email = "";
+$new_firstname = "";
+$new_lastname = "";
+$new_username = "";
+
+$new_email_err = "";
+$new_firstname_err = "";
+$new_lastname_err = "";
+$new_username_err = "";
+
 
 if($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Validate new password
-    if (empty(trim($_POST["new_password"]))) {
-        $new_password_err = "Please enter the new password.";
-    } elseif (strlen(trim($_POST["new_password"])) < 6) {
-        $new_password_err = "Password must have atleast 6 characters.";
-    } else {
-        $new_password = trim($_POST["new_password"]);
-    }
+    $new_email = trim($_POST["new_email"]);
+    $new_firstname = trim($_POST["new_firstname"]);
+    $new_lastname = trim($_POST["new_lastname"]);
+    $new_username = trim($_POST["new_username"]);
 
-    // Validate confirm password
-    if (empty(trim($_POST["confirm_password"]))) {
-        $confirm_password_err = "Please confirm the password.";
-    } else {
-        $confirm_password = trim($_POST["confirm_password"]);
-        if (empty($new_password_err) && ($new_password != $confirm_password)) {
-            $confirm_password_err = "Password did not match.";
-        }
-    }
+    echo "values been set";
 
     // Check input errors
-    if (empty($new_password_err) && empty($confirm_password_err)) {
+    if (empty($new_email) && empty($new_firstname)  && empty($new_lastname) && empty($new_username)){
         // Prepare an update statement
-        $query = "UPDATE comp2003_d.usertbl SET password = ? WHERE userID = ?";
+        $query = "call comp2003_d.updateuser(?, ?, ?, ?, ?, ?)";
+        echo "query made";
 
         if ($stmt = mysqli_prepare($con, $query)) {
+            echo " connected ";
             // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "si", $param_password, $param_id);
+            mysqli_stmt_bind_param($stmt, "isssss", $param_id, $param_firstname, $param_lastname, $param_username, $param_email, $param_password);
+            echo " bind varibles ";
 
             // Set parameters
-            $param_password = password_hash($new_password, PASSWORD_DEFAULT);
             $param_id = $_SESSION["id"];
+            $param_firstname = $new_firstname;
+            $param_lastname = $new_lastname;
+            $param_username = $new_username;
+            $param_email = $new_email;
+            $param_password = "randompassword";
+
+            echo " set parameters ";
 
             if(mysqli_stmt_execute($stmt)){
-//              Password updated
+//              Account updated
                 session_destroy();
                 header("location: login.php");
             } else{
@@ -126,24 +129,27 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                     <li class="nav-item">
                         <a class="nav-link" href="stats.php">Stats</a>
                     </li>
-                    </ul>';
+                    </ul>
+
+                    <ul class="navbar-nav mt-2 mt-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.php">Account</a>
+                    </li>
+                </ul>';
+        }
+        else{
+            echo '<ul class="navbar-nav mt-2 mt-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.php">Login</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav mt-2 mt-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="register.php">Register</a>
+                    </li>
+                </ul>';
         }
         ?>
-        <ul class="navbar-nav mt-2 mt-lg-0">
-            <li class="nav-item active">
-                <a class="nav-link" href="edit_account.php">Edit account</a>
-            </li>
-        </ul>
-        <ul class="navbar-nav mt-2 mt-lg-0">
-            <li class="nav-item">
-                <a class="nav-link" href="login.php">Login</a>
-            </li>
-        </ul>
-        <ul class="navbar-nav mt-2 mt-lg-0">
-            <li class="nav-item">
-                <a class="nav-link" href="register.php">Register</a>
-            </li>
-        </ul>
     </div>
 </nav>
 
@@ -154,42 +160,42 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 
             <div class="form-group
-                <?php echo (!empty($email_err)) ? 'has-error' : ''; ?>">
+                <?php echo (!empty($new_email_err)) ? 'has-error' : ''; ?>">
                 <label>Email</label>
-                <input type="email" name="email" class="form-control" value="<?php session_start(); echo $_SESSION["email"]?>">
+                <input type="email" name="new_email" class="form-control" value="<?php session_start(); echo $_SESSION["email"]?>">
 
                 <span class="help-block">
-                    <?php echo $email_err; ?>
+                    <?php echo $new_email_err; ?>
                 </span>
             </div>
 
             <div class="form-group
-                <?php echo (!empty($firstName_err)) ? 'has-error' : ''; ?>">
+                <?php echo (!empty($new_firstname_err)) ? 'has-error' : ''; ?>">
                 <label>First Name</label>
-                <input type="text" name="firstname" class="form-control" value="<?php session_start(); echo $_SESSION["firstName"]?>">
+                <input type="text" name="new_firstname" class="form-control" value="<?php session_start(); echo $_SESSION["firstName"]?>">
 
                 <span class="help-block">
-                    <?php echo $firstName_err; ?>
+                    <?php echo $new_firstname_err; ?>
                 </span>
             </div>
 
             <div class="form-group
-                <?php echo (!empty($lastName_err)) ? 'has-error' : ''; ?>">
+                <?php echo (!empty($new_lastname_err)) ? 'has-error' : ''; ?>">
                 <label>Last Name</label>
-                <input type="text" name="lastname" class="form-control" value="<?php session_start(); echo $_SESSION["lastName"]?>">
+                <input type="text" name="new_lastname" class="form-control" value="<?php session_start(); echo $_SESSION["lastName"]?>">
 
                 <span class="help-block">
-                    <?php echo $lastName_err; ?>
+                    <?php echo $new_lastname_err; ?>
                 </span>
             </div>
 
             <div class="form-group
-                <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
+                <?php echo (!empty($new_username_err)) ? 'has-error' : ''; ?>">
                 <label>Username</label>
-                <input type="text" name="username" class="form-control" value="<?php session_start(); echo $_SESSION["username"]?>">
+                <input type="text" name="new_username" class="form-control" value="<?php session_start(); echo $_SESSION["username"]?>">
 
                 <span class="help-block">
-                    <?php echo $username_err; ?>
+                    <?php echo $new_username_err; ?>
                 </span>
             </div>
 
@@ -198,7 +204,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                 <input type="reset" class="btn btn-primary" value="Reset">
             </div>
 
-            <a href="login.php">Cancel</a>
+            <a href="welcome.php">Cancel</a>
 
         </form>
     </div>

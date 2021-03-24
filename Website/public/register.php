@@ -221,24 +221,27 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     <li class="nav-item">
                         <a class="nav-link" href="stats.php">Stats</a>
                     </li>
-                    </ul>';
+                    </ul>
+
+                    <ul class="navbar-nav mt-2 mt-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.php">Account</a>
+                    </li>
+                </ul>';
+        }
+        else{
+            echo '<ul class="navbar-nav mt-2 mt-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.php">Login</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav mt-2 mt-lg-0">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="register.php">Register</a>
+                    </li>
+                </ul>';
         }
         ?>
-        <ul class="navbar-nav mt-2 mt-lg-0">
-            <li class="nav-item">
-                <a class="nav-link" href="login.php">Account</a>
-            </li>
-        </ul>
-        <ul class="navbar-nav mt-2 mt-lg-0">
-            <li class="nav-item">
-                <a class="nav-link" href="login.php">Login</a>
-            </li>
-        </ul>
-        <ul class="navbar-nav mt-2 mt-lg-0">
-            <li class="nav-item active">
-                <a class="nav-link" href="register.php">Register</a>
-            </li>
-        </ul>
     </div>
 </nav>
 
