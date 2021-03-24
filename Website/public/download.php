@@ -56,6 +56,18 @@
                         <a class="nav-link" href="contact_us.php">Contact us</a>
                     </li>
                 </ul>
+                <?php
+
+                session_start();
+
+                if(isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] == true){
+                    echo '<ul class="navbar-nav mt-2 mt-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="stats.php">Stats</a>
+                    </li>
+                    </ul>';
+                }
+                ?>
                 <ul class="navbar-nav mt-2 mt-lg-0">
                     <li class="nav-item">
                         <a class="nav-link" href="login.php">Account</a>
