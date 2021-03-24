@@ -86,7 +86,7 @@ namespace Pathfinding {
 			}
 
 			// Pool the temporary list
-			ListPool<GraphNode>.Release(ref reachable);
+			ListPool<GraphNode>.Release (ref reachable);
 
 			return result;
 		}
@@ -114,8 +114,8 @@ namespace Pathfinding {
 		/// <param name="filter">Optional filter for which nodes to search. You can combine this with tagMask = -1 to make the filter determine everything.
 		///      Only walkable nodes are searched regardless of the filter. If the filter function returns false the node will be treated as unwalkable.</param>
 		public static List<GraphNode> GetReachableNodes (GraphNode seed, int tagMask = -1, System.Func<GraphNode, bool> filter = null) {
-			Stack<GraphNode> dfsStack = StackPool<GraphNode>.Claim();
-			List<GraphNode> reachable = ListPool<GraphNode>.Claim();
+			Stack<GraphNode> dfsStack = StackPool<GraphNode>.Claim ();
+			List<GraphNode> reachable = ListPool<GraphNode>.Claim ();
 
 			/// <summary>TODO: Pool</summary>
 			var map = new HashSet<GraphNode>();
@@ -146,7 +146,7 @@ namespace Pathfinding {
 				dfsStack.Pop().GetConnections(callback);
 			}
 
-			StackPool<GraphNode>.Release(dfsStack);
+			StackPool<GraphNode>.Release (dfsStack);
 			return reachable;
 		}
 
@@ -182,6 +182,11 @@ namespace Pathfinding {
 		/// <param name="filter">Optional filter for which nodes to search. You can combine this with depth = int.MaxValue and tagMask = -1 to make the filter determine everything.
 		///      Only walkable nodes are searched regardless of the filter. If the filter function returns false the node will be treated as unwalkable.</param>
 		public static List<GraphNode> BFS (GraphNode seed, int depth, int tagMask = -1, System.Func<GraphNode, bool> filter = null) {
+#if ASTAR_PROFILE
+			System.Diagnostics.Stopwatch watch = new System.Diagnostics.Stopwatch();
+			watch.Start();
+#endif
+
 			BFSQueue = BFSQueue ?? new Queue<GraphNode>();
 			var que = BFSQueue;
 
@@ -195,7 +200,7 @@ namespace Pathfinding {
 			que.Clear();
 			map.Clear();
 
-			List<GraphNode> result = ListPool<GraphNode>.Claim();
+			List<GraphNode> result = ListPool<GraphNode>.Claim ();
 
 			int currentDist = -1;
 			System.Action<GraphNode> callback;
@@ -235,6 +240,10 @@ namespace Pathfinding {
 			que.Clear();
 			map.Clear();
 
+#if ASTAR_PROFILE
+			watch.Stop();
+			Debug.Log((1000*watch.Elapsed.TotalSeconds).ToString("0.0 ms"));
+#endif
 			return result;
 		}
 
@@ -251,7 +260,7 @@ namespace Pathfinding {
 		/// See: Pathfinding.Util.ListPool
 		/// </summary>
 		public static List<Vector3> GetSpiralPoints (int count, float clearance) {
-			List<Vector3> pts = ListPool<Vector3>.Claim(count);
+			List<Vector3> pts = ListPool<Vector3>.Claim (count);
 
 			// The radius of the smaller circle used for generating the involute of a circle
 			// Calculated from the separation distance between the turns
@@ -439,16 +448,18 @@ namespace Pathfinding {
 			if (nodes == null) throw new System.ArgumentNullException("nodes");
 			if (nodes.Count == 0) throw new System.ArgumentException("no nodes passed");
 
-			List<Vector3> pts = ListPool<Vector3>.Claim(count);
+			List<Vector3> pts = ListPool<Vector3>.Claim (count);
 
 			// Square
 			clearanceRadius *= clearanceRadius;
 
 			if (clearanceRadius > 0 || nodes[0] is TriangleMeshNode
+#if !ASTAR_NO_GRID_GRAPH
 				|| nodes[0] is GridNode
+#endif
 				) {
 				// Accumulated area of all nodes
-				List<float> accs = ListPool<float>.Claim(nodes.Count);
+				List<float> accs = ListPool<float>.Claim (nodes.Count);
 
 				// Total area of all nodes so far
 				float tot = 0;
@@ -511,7 +522,7 @@ namespace Pathfinding {
 					}
 				}
 
-				ListPool<float>.Release(ref accs);
+				ListPool<float>.Release (ref accs);
 			} else {
 				// Fast path, assumes all nodes have the same area (usually zero)
 				for (int i = 0; i < count; i++) {

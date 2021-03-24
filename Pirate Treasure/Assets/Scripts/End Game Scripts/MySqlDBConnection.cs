@@ -12,8 +12,9 @@ public class MySqlDBConnection : MonoBehaviour
     public Text emailText;
     public Text passwordText;
     //Table column names
-    string ID, Name, Score, EnemiesDefeated, TreasureCollected, TimeSurvived, CannonballsFired;
-    string emailInput, passwordInput;
+    //string ID, Name, Score, EnemiesDefeated, TreasureCollected, TimeSurvived, CannonballsFired;
+    string emailInput, passwordInput, userIDVal;
+    public Text currentScore, currentKills, currentChests, currentTime, currentShots;
 
     bool saving;
     bool loading;
@@ -79,7 +80,7 @@ public class MySqlDBConnection : MonoBehaviour
 
         try
         {
-            query = "SELECT email, password FROM usertbl WHERE email = '" + emailInput + "' AND password = '" + passwordInput+ "'" ;
+            query = "SELECT userID, email, password FROM usertbl WHERE email = '" + emailInput + "' AND password = '" + passwordInput+ "'" ;
             if(con.State.ToString() != "Open")
             {
                 con.Open();
@@ -93,6 +94,11 @@ public class MySqlDBConnection : MonoBehaviour
                     {
                         valid = true;
                         Debug.Log("Login Valid!");
+
+                        userIDVal = rdr["userID"].ToString();
+
+                        GetCurrentStats();
+                        
                     }
                     else
                     {
@@ -112,7 +118,7 @@ public class MySqlDBConnection : MonoBehaviour
         string query = string.Empty;
         try
         {
-            query = "INSERT INTO demo_table (userID, highscore, kills, chestsCollected, time, ballsFired) VALUES (?ID, ?Score, ?Kills, ?Chests, ?Time, ?Fired)";
+            query = "INSERT INTO statstbl (userID, highScore, kills, chestsCollected, time, ballsFired) VALUES (?ID, ?Score, ?Kills, ?Chests, ?Time, ?Fired)";
             if (con.State.ToString() != "Open")
             {
                 con.Open();
@@ -122,19 +128,7 @@ public class MySqlDBConnection : MonoBehaviour
                 using (cmd = new MySqlCommand(query, con))
                 {
                     MySqlParameter uIDParam = cmd.Parameters.Add("?ID", MySqlDbType.VarChar);
-                    string sql = "SELECT userID FROM usertbl WHERE email = '" + emailInput+ "'";  
-                    using(cmd = new MySqlCommand(sql, con))
-                    {
-                        rdr = cmd.ExecuteReader();
-                        if (rdr.HasRows)
-                        {
-                            while (rdr.Read())
-                            {
-                                uIDParam.Value = rdr["userID"].ToString();
-                            }
-                        }
-                    }
-                    
+                    uIDParam.Value = userIDVal;
                     MySqlParameter scoreParam = cmd.Parameters.Add("?Score", MySqlDbType.VarChar);
                     scoreParam.Value = DataHandler.getScore();
                     MySqlParameter killsParam = cmd.Parameters.Add("?Kills", MySqlDbType.VarChar);
@@ -161,7 +155,7 @@ public class MySqlDBConnection : MonoBehaviour
         string query = string.Empty;
         try
         {
-            query = "UPDATE demo_table SET highscore=?Score, kills = ?Kills, chestsCollected = ?Chests, time = ?Time, ballsFired = ?Fired WHERE userID =" ;
+            query = "UPDATE statstbl SET highScore=?Score, kills = ?Kills, chestsCollected = ?Chests, time = ?Time, ballsFired = ?Fired WHERE userID = " + userIDVal;
             if (con.State.ToString() != "Open")
                 con.Open();
             using (con)
@@ -192,5 +186,40 @@ public class MySqlDBConnection : MonoBehaviour
     void GetCurrentStats()
     {
         string query = string.Empty;
+        try
+        {
+            query = "SELECT highScore, kills, chestsCollected, time, ballsFired FROM statstbl WHERE userID = " + userIDVal;
+            if (con.State.ToString() != "Open")
+                con.Open();
+            using (con)
+            {
+                using (cmd = new MySqlCommand(query, con))
+                {
+                    rdr = cmd.ExecuteReader();
+                    if (rdr.HasRows)
+                    {
+                        while (rdr.Read())
+                        {
+                            currentScore.enabled = true;
+                            currentScore.text = rdr["highScore"].ToString();
+                            currentKills.enabled = true;
+                            currentKills.text = rdr["kills"].ToString();
+                            currentChests.enabled = true;
+                            currentChests.text = rdr["chestsCollected"].ToString();
+                            currentTime.enabled = true;
+                            currentTime.text = rdr["time"].ToString();
+                            currentShots.enabled = true;
+                            currentShots.text = rdr["ballsFired"].ToString();
+                        }
+                    }
+                }
+                    
+            }
+        }
+        catch(Exception ex)
+        {
+            Debug.Log(ex.ToString());
+        }
     }
 }
+

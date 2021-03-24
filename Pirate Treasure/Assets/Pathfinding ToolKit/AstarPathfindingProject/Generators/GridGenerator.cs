@@ -9,7 +9,6 @@ namespace Pathfinding {
 	using Pathfinding.Serialization;
 	using Pathfinding.Util;
 
-	[JsonOptIn]
 	/// <summary>
 	/// Generates a grid of nodes.
 	/// The GridGraph does exactly what the name implies, generates nodes in a grid pattern.\n
@@ -82,6 +81,8 @@ namespace Pathfinding {
 	/// See: <see cref="Pathfinding.GraphCollision"/> for documentation on the 'Height Testing' and 'Collision Testing' sections
 	/// of the grid graph settings.
 	/// </summary>
+	[JsonOptIn]
+	[Pathfinding.Util.Preserve]
 	public class GridGraph : NavGraph, IUpdatableGraph, ITransformedGraph {
 		/// <summary>This function will be called when this graph is destroyed</summary>
 		protected override void OnDestroy () {
@@ -130,7 +131,7 @@ namespace Pathfinding {
 		}
 
 		public override int CountNodes () {
-			return nodes.Length;
+			return nodes != null ? nodes.Length : 0;
 		}
 
 		public override void GetNodes (System.Action<GraphNode> action) {
@@ -149,6 +150,23 @@ namespace Pathfinding {
 		/// </summary>
 		[JsonMember]
 		public InspectorGridMode inspectorGridMode = InspectorGridMode.Grid;
+
+		/// <summary>
+		/// Determines how the size of each hexagon is set in the inspector.
+		/// For hexagons the normal nodeSize field doesn't really correspond to anything specific on the hexagon's geometry, so this enum is used to give the user the opportunity to adjust more concrete dimensions of the hexagons
+		/// without having to pull out a calculator to calculate all the square roots and complicated conversion factors.
+		///
+		/// This field is only used in the graph inspector, the <see cref="nodeSize"/> field will always use the same internal units.
+		/// If you want to set the node size through code then you can use <see cref="ConvertHexagonSizeToNodeSize"/>.
+		///
+		/// [Open online documentation to see images]
+		///
+		/// See: <see cref="InspectorGridHexagonNodeSize"/>
+		/// See: <see cref="ConvertHexagonSizeToNodeSize"/>
+		/// See: <see cref="ConvertNodeSizeToHexagonSize"/>
+		/// </summary>
+		[JsonMember]
+		public InspectorGridHexagonNodeSize inspectorHexagonSizeMode = InspectorGridHexagonNodeSize.Width;
 
 		/// <summary>Width of the grid in nodes. See: SetDimensions</summary>
 		public int width;
@@ -453,6 +471,18 @@ namespace Pathfinding {
 		/// </summary>
 		public Int3 GraphPointToWorld (int x, int z, float height) {
 			return (Int3)transform.Transform(new Vector3(x+0.5f, height, z+0.5f));
+		}
+
+		public static float ConvertHexagonSizeToNodeSize (InspectorGridHexagonNodeSize mode, float value) {
+			if (mode == InspectorGridHexagonNodeSize.Diameter) value *= 1.5f/(float)System.Math.Sqrt(2.0f);
+			else if (mode == InspectorGridHexagonNodeSize.Width) value *= (float)System.Math.Sqrt(3.0f/2.0f);
+			return value;
+		}
+
+		public static float ConvertNodeSizeToHexagonSize (InspectorGridHexagonNodeSize mode, float value) {
+			if (mode == InspectorGridHexagonNodeSize.Diameter) value *= (float)System.Math.Sqrt(2.0f)/1.5f;
+			else if (mode == InspectorGridHexagonNodeSize.Width) value *= (float)System.Math.Sqrt(2.0f/3.0f);
+			return value;
 		}
 
 		public int Width {
@@ -1226,7 +1256,7 @@ namespace Pathfinding {
 			}
 
 			// Return the list to the pool
-			Pathfinding.Util.ListPool<GraphNode>.Release(ref nodesInRect);
+			Pathfinding.Util.ListPool<GraphNode>.Release (ref nodesInRect);
 		}
 
 		/// <summary>
@@ -1284,7 +1314,13 @@ namespace Pathfinding {
 			for (int i = 0; i < 8; i++) {
 				int nx = x + neighbourXOffsets[i];
 				int nz = z + neighbourZOffsets[i];
-				CalculateConnections(nx, nz);
+
+				// Check if the new position is inside the grid
+				// Bitwise AND (&) is measurably faster than &&
+				// (not much, but this code is hot)
+				if (nx >= 0 & nz >= 0 & nx < width & nz < depth) {
+					CalculateConnections(nx, nz);
+				}
 			}
 		}
 
@@ -1475,7 +1511,7 @@ namespace Pathfinding {
 			// for large graphs. However just checking if any mesh needs to be updated is relatively fast. So we just store
 			// a hash together with the mesh and rebuild the mesh when necessary.
 			const int chunkWidth = 32;
-			GridNodeBase[] allNodes = ArrayPool<GridNodeBase>.Claim(chunkWidth*chunkWidth*LayerCount);
+			GridNodeBase[] allNodes = ArrayPool<GridNodeBase>.Claim (chunkWidth*chunkWidth*LayerCount);
 			for (int cx = width/chunkWidth; cx >= 0; cx--) {
 				for (int cz = depth/chunkWidth; cz >= 0; cz--) {
 					Profiler.BeginSample("Hash");
@@ -1506,7 +1542,7 @@ namespace Pathfinding {
 					}
 				}
 			}
-			ArrayPool<GridNodeBase>.Release(ref allNodes);
+			ArrayPool<GridNodeBase>.Release (ref allNodes);
 
 			if (active.showUnwalkableNodes) DrawUnwalkableNodes(nodeSize * 0.3f);
 		}
@@ -1531,8 +1567,8 @@ namespace Pathfinding {
 			var verticesPerNode = 3*trianglesPerNode;
 
 			// Get arrays that have room for all vertices/colors (the array might be larger)
-			var vertices = ArrayPool<Vector3>.Claim(walkable*verticesPerNode);
-			var colors = ArrayPool<Color>.Claim(walkable*verticesPerNode);
+			var vertices = ArrayPool<Vector3>.Claim (walkable*verticesPerNode);
+			var colors = ArrayPool<Color>.Claim (walkable*verticesPerNode);
 			int baseIndex = 0;
 
 			for (int i = 0; i < nodeCount; i++) {
@@ -1620,8 +1656,8 @@ namespace Pathfinding {
 
 			if (showMeshSurface) helper.DrawTriangles(vertices, colors, baseIndex*trianglesPerNode/verticesPerNode);
 
-			ArrayPool<Vector3>.Release(ref vertices);
-			ArrayPool<Color>.Release(ref colors);
+			ArrayPool<Vector3>.Release (ref vertices);
+			ArrayPool<Color>.Release (ref colors);
 		}
 
 		/// <summary>
@@ -1702,11 +1738,11 @@ namespace Pathfinding {
 			var rect = GetRectFromBounds(bounds);
 
 			if (nodes == null || !rect.IsValid() || nodes.Length != width*depth) {
-				return ListPool<GraphNode>.Claim();
+				return ListPool<GraphNode>.Claim ();
 			}
 
 			// Get a buffer we can use
-			var inArea = ListPool<GraphNode>.Claim(rect.Width*rect.Height);
+			var inArea = ListPool<GraphNode>.Claim (rect.Width*rect.Height);
 
 			// Loop through all nodes in the rectangle
 			for (int x = rect.xmin; x <= rect.xmax; x++) {
@@ -1735,10 +1771,10 @@ namespace Pathfinding {
 
 			rect = IntRect.Intersection(rect, gridRect);
 
-			if (nodes == null || !rect.IsValid() || nodes.Length != width*depth) return ListPool<GraphNode>.Claim(0);
+			if (nodes == null || !rect.IsValid() || nodes.Length != width*depth) return ListPool<GraphNode>.Claim (0);
 
 			// Get a buffer we can use
-			var inArea = ListPool<GraphNode>.Claim(rect.Width*rect.Height);
+			var inArea = ListPool<GraphNode>.Claim (rect.Width*rect.Height);
 
 
 			for (int z = rect.ymin; z <= rect.ymax; z++) {
@@ -1870,6 +1906,11 @@ namespace Pathfinding {
 			int erosion;
 			CalculateAffectedRegions(o, out originalRect, out affectRect, out physicsRect, out willChangeWalkability, out erosion);
 
+#if ASTARDEBUG
+			var debugMatrix = transform * Matrix4x4.TRS(new Vector3(0.5f, 0, 0.5f), Quaternion.identity, Vector3.one);
+
+			originalRect.DebugDraw(debugMatrix, Color.red);
+#endif
 
 			// Rect which covers the whole grid
 			var gridRect = new IntRect(0, 0, width-1, depth-1);
@@ -1918,6 +1959,10 @@ namespace Pathfinding {
 				}
 			}
 
+#if ASTARDEBUG
+			physicsRect.DebugDraw(debugMatrix, Color.blue);
+			affectRect.DebugDraw(debugMatrix, Color.black);
+#endif
 
 			// Recalculate connections
 			if (willChangeWalkability && erosion == 0) {
@@ -1936,6 +1981,10 @@ namespace Pathfinding {
 				erosionRect1 = IntRect.Intersection(erosionRect1, gridRect);
 				erosionRect2 = IntRect.Intersection(erosionRect2, gridRect);
 
+#if ASTARDEBUG
+				erosionRect1.DebugDraw(debugMatrix, Color.magenta);
+				erosionRect2.DebugDraw(debugMatrix, Color.cyan);
+#endif
 
 
 				// * all nodes inside clampedRect might have had their walkability changed
