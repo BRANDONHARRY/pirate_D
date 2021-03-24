@@ -26,13 +26,19 @@ namespace Pathfinding.Util {
 		/// <summary>Queue of items</summary>
 		readonly Queue<T> queue;
 		readonly int initialCount;
+#if !SINGLE_THREAD
 		ManualResetEvent[] waitEvents;
 		System.Exception innerException;
+#endif
 
 		public ParallelWorkQueue (Queue<T> queue) {
 			this.queue = queue;
 			initialCount = queue.Count;
+#if SINGLE_THREAD
+			threadCount = 1;
+#else
 			threadCount = System.Math.Min(initialCount, System.Math.Max(1, AstarPath.CalculateThreadCount(ThreadCount.AutomaticHighLoad)));
+#endif
 		}
 
 		/// <summary>Execute the tasks.</summary>
@@ -47,17 +53,24 @@ namespace Pathfinding.Util {
 			// and the documentation says it should throw an exception).
 			if (initialCount == 0) yield break;
 
+#if SINGLE_THREAD
+			// WebGL does not support multithreading so we will do everything on the main thread instead
+			for (int i = 0; i < initialCount; i++) {
+				action(queue.Dequeue(), 0);
+				yield return i + 1;
+			}
+#else
 			// Fire up a bunch of threads to scan the graph in parallel
 			waitEvents = new ManualResetEvent[threadCount];
 			for (int i = 0; i < waitEvents.Length; i++) {
 				waitEvents[i] = new ManualResetEvent(false);
-				#if NETFX_CORE
+#if NETFX_CORE
 				// Need to make a copy here, otherwise it may refer to some other index when the task actually runs.
 				int threadIndex = i;
 				System.Threading.Tasks.Task.Run(() => RunTask(threadIndex));
-				#else
+#else
 				ThreadPool.QueueUserWorkItem(threadIndex => RunTask((int)threadIndex), i);
-				#endif
+#endif
 			}
 
 			while (!WaitHandle.WaitAll(waitEvents, progressTimeoutMillis)) {
@@ -67,8 +80,10 @@ namespace Pathfinding.Util {
 			}
 
 			if (innerException != null) throw innerException;
+#endif
 		}
 
+#if !SINGLE_THREAD
 		void RunTask (int threadIndex) {
 			try {
 				while (true) {
@@ -87,5 +102,6 @@ namespace Pathfinding.Util {
 				waitEvents[threadIndex].Set();
 			}
 		}
+#endif
 	}
 }

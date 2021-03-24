@@ -26,10 +26,10 @@ using Thread = System.Threading.Thread;
 [HelpURL("http://arongranberg.com/astar/docs/class_astar_path.php")]
 public class AstarPath : VersionedMonoBehaviour {
 	/// <summary>The version number for the A* %Pathfinding Project</summary>
-	public static readonly System.Version Version = new System.Version(4, 2, 2);
+	public static readonly System.Version Version = new System.Version(4, 2, 15);
 
 	/// <summary>Information about where the package was downloaded</summary>
-	public enum AstarDistribution { WebsiteDownload, AssetStore };
+	public enum AstarDistribution { WebsiteDownload, AssetStore, PackageManager };
 
 	/// <summary>Used by the editor to guide the user to the correct place to download updates</summary>
 	public static readonly AstarDistribution Distribution = AstarDistribution.WebsiteDownload;
@@ -40,7 +40,7 @@ public class AstarPath : VersionedMonoBehaviour {
 	/// users of the development versions can get notifications of development
 	/// updates.
 	/// </summary>
-	public static readonly string Branch = "master_Free";
+	public static readonly string Branch = "master";
 
 	/// <summary>
 	/// See Pathfinding.AstarData
@@ -379,6 +379,16 @@ public class AstarPath : VersionedMonoBehaviour {
 	/// @{
 	/// </summary>
 
+#if ProfileAstar
+	/// <summary>
+	/// How many paths has been computed this run. From application start.\n
+	/// Debugging variable
+	/// </summary>
+	public static int PathsCompleted = 0;
+
+	public static System.Int64 TotalSearchedNodes = 0;
+	public static System.Int64 TotalSearchTime = 0;
+#endif
 
 	/// <summary>
 	/// The time it took for the last call to Scan() to complete.
@@ -606,7 +616,7 @@ public class AstarPath : VersionedMonoBehaviour {
 
 	/// <summary>
 	/// Holds settings for heuristic optimization.
-	/// See: heuristic-opt
+	/// See: heuristic-opt (view in online documentation for working links)
 	/// </summary>
 	public EuclideanEmbedding euclideanEmbedding = new EuclideanEmbedding();
 
@@ -678,7 +688,7 @@ public class AstarPath : VersionedMonoBehaviour {
 	/// </summary>
 	public static string[] FindTagNames () {
 		FindAstarPath();
-		return active != null ? active.GetTagNames() : new string[1] { "There is no AstarPath component in the scene" };
+		return active != null? active.GetTagNames () : new string[1] { "There is no AstarPath component in the scene" };
 	}
 
 	/// <summary>Returns the next free path ID</summary>
@@ -703,7 +713,7 @@ public class AstarPath : VersionedMonoBehaviour {
 		for (int i = 0; i < graphs.Length; i++) {
 			if (graphs[i] != null && graphs[i].drawGizmos) {
 				graphs[i].GetNodes(node => {
-					if (ignoreSearchTree || Pathfinding.Util.GraphGizmoHelper.InSearchTree(node, debugPathData, debugPathID)) {
+					if (node.Walkable && (ignoreSearchTree || Pathfinding.Util.GraphGizmoHelper.InSearchTree(node, debugPathData, debugPathID))) {
 						if (debugMode == GraphDebugMode.Penalty) {
 							debugFloor = Mathf.Min(debugFloor, node.Penalty);
 							debugRoof = Mathf.Max(debugRoof, node.Penalty);
@@ -740,8 +750,6 @@ public class AstarPath : VersionedMonoBehaviour {
 
 	Pathfinding.Util.RetainedGizmos gizmos = new Pathfinding.Util.RetainedGizmos();
 
-	int lastRenderedFrame = -1;
-
 	/// <summary>Calls OnDrawGizmos on graph generators</summary>
 	private void OnDrawGizmos () {
 		// Make sure the singleton pattern holds
@@ -768,7 +776,7 @@ public class AstarPath : VersionedMonoBehaviour {
 
 		AstarProfiler.StartProfile("OnDrawGizmos");
 
-		if (workItems.workItemsInProgress || isScanning || Time.renderedFrameCount == lastRenderedFrame) {
+		if (workItems.workItemsInProgress || isScanning) {
 			// If updating graphs, graph info might not be valid right now
 			// so just draw the same thing as last frame.
 			// Also if the scene has multiple cameras (or in the editor if we have a scene view and a game view) we
@@ -794,12 +802,12 @@ public class AstarPath : VersionedMonoBehaviour {
 			}
 		}
 
-		lastRenderedFrame = Time.renderedFrameCount;
 		gizmos.FinalizeDraw();
 
 		AstarProfiler.EndProfile("OnDrawGizmos");
 	}
 
+#if !ASTAR_NO_GUI
 	/// <summary>
 	/// Draws the InGame debugging (if enabled), also shows the fps if 'L' is pressed down.
 	/// See: <see cref="logPathResults"/> PathLog
@@ -809,6 +817,7 @@ public class AstarPath : VersionedMonoBehaviour {
 			GUI.Label(new Rect(5, 5, 400, 600), inGameDebugPath);
 		}
 	}
+#endif
 
 	/// <summary>
 	/// Prints path results to the log. What it prints can be controled using <see cref="logPathResults"/>.
@@ -1380,7 +1389,7 @@ public class AstarPath : VersionedMonoBehaviour {
 		FlushWorkItems();
 
 		// Don't accept any more path calls to this AstarPath instance.
-		// This will cause all eventual multithreading threads to exit
+		// This will cause all pathfinding threads to exit (if any exist)
 		pathProcessor.queue.TerminateReceivers();
 
 		if (logPathResults == PathLog.Heavy)
@@ -1955,15 +1964,6 @@ public class AstarPath : VersionedMonoBehaviour {
 		if (!Application.isPlaying) {
 			BlockUntilCalculated(path);
 		}
-	}
-
-	/// <summary>Terminates pathfinding threads when the application quits</summary>
-	void OnApplicationQuit () {
-		OnDestroy();
-
-		// Abort threads if they are still running (likely because of some bug in that case)
-		// to make sure that the application can shut down properly
-		pathProcessor.AbortThreads();
 	}
 
 	/// <summary>

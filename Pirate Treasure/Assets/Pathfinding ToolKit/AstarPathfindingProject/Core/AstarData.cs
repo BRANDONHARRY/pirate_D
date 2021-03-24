@@ -31,18 +31,21 @@ namespace Pathfinding {
 		/// </summary>
 		public NavMeshGraph navmesh { get; private set; }
 
+#if !ASTAR_NO_GRID_GRAPH
 		/// <summary>
 		/// Shortcut to the first GridGraph.
 		/// Updated at scanning time
 		/// </summary>
 		public GridGraph gridGraph { get; private set; }
+#endif
 
-
+#if !ASTAR_NO_POINT_GRAPH
 		/// <summary>
 		/// Shortcut to the first PointGraph.
 		/// Updated at scanning time
 		/// </summary>
 		public PointGraph pointGraph { get; private set; }
+#endif
 
 
 		/// <summary>
@@ -57,8 +60,12 @@ namespace Pathfinding {
 		/// If you add any custom graph types, you need to add them to this hard-coded list.
 		/// </summary>
 		public static readonly System.Type[] DefaultGraphTypes = new System.Type[] {
+#if !ASTAR_NO_GRID_GRAPH
 			typeof(GridGraph),
+#endif
+#if !ASTAR_NO_POINT_GRAPH
 			typeof(PointGraph),
+#endif
 			typeof(NavMeshGraph),
 		};
 #endif
@@ -101,10 +108,10 @@ namespace Pathfinding {
 					data = upgradeData;
 					upgradeData = null;
 				}
-				return dataString != null ? System.Convert.FromBase64String(dataString) : null;
+				return dataString != null? System.Convert.FromBase64String (dataString) : null;
 			}
 			set {
-				dataString = value != null ? System.Convert.ToBase64String(value) : null;
+				dataString = value != null? System.Convert.ToBase64String (value) : null;
 			}
 		}
 
@@ -227,9 +234,13 @@ namespace Pathfinding {
 		public void UpdateShortcuts () {
 			navmesh = (NavMeshGraph)FindGraphOfType(typeof(NavMeshGraph));
 
+#if !ASTAR_NO_GRID_GRAPH
 			gridGraph = (GridGraph)FindGraphOfType(typeof(GridGraph));
+#endif
 
+#if !ASTAR_NO_POINT_GRAPH
 			pointGraph = (PointGraph)FindGraphOfType(typeof(PointGraph));
+#endif
 		}
 
 		/// <summary>Load from data from <see cref="file_cachedStartup"/></summary>
@@ -282,6 +293,9 @@ namespace Pathfinding {
 			sr.SerializeExtraInfo();
 			byte[] bytes = sr.CloseSerialize();
 			checksum = sr.GetChecksum();
+#if ASTARDEBUG
+			Debug.Log("Got a whole bunch of data, "+bytes.Length+" bytes");
+#endif
 			graphLock.Release();
 			return bytes;
 		}
@@ -363,7 +377,8 @@ namespace Pathfinding {
 			// the graphs with the correct graph indexes
 			sr.SetGraphIndexOffset(gr.Count);
 
-			gr.AddRange(sr.DeserializeGraphs());
+			if (graphTypes == null) FindGraphTypes();
+			gr.AddRange(sr.DeserializeGraphs(graphTypes));
 			graphs = gr.ToArray();
 
 			sr.DeserializeEditorSettingsCompatibility();
@@ -399,7 +414,14 @@ namespace Pathfinding {
 #if !ASTAR_FAST_NO_EXCEPTIONS && !UNITY_WINRT && !UNITY_WEBGL
 			var graphList = new List<System.Type>();
 			foreach (var assembly in System.AppDomain.CurrentDomain.GetAssemblies()) {
-				var types = assembly.GetTypes();
+				System.Type[] types = null;
+				try {
+					types = assembly.GetTypes();
+				} catch {
+					// Ignore type load exceptions and things like that.
+					// We might not be able to read all assemblies for some reason, but hopefully the relevant types exist in the assemblies that we can read
+					continue;
+				}
 
 				foreach (var type in types) {
 #if NETFX_CORE && !UNITY_EDITOR
@@ -424,6 +446,10 @@ namespace Pathfinding {
 			}
 
 			graphTypes = graphList.ToArray();
+
+#if ASTARDEBUG
+			Debug.Log("Found "+graphTypes.Length+" graph types");
+#endif
 #else
 			graphTypes = DefaultGraphTypes;
 #endif
@@ -501,7 +527,10 @@ namespace Pathfinding {
 			return graph;
 		}
 
-		/// <summary>Adds a graph of type type to the <see cref="graphs"/> array</summary>
+		/// <summary>
+		/// Adds a graph of type type to the <see cref="graphs"/> array.
+		/// See: runtime-graphs (view in online documentation for working links)
+		/// </summary>
 		public NavGraph AddGraph (System.Type type) {
 			NavGraph graph = null;
 
