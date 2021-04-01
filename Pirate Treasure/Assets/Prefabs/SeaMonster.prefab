@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 5296950560004953181}
   m_Layer: 0
   m_Name: SeaMonster
-  m_TagString: Untagged
+  m_TagString: Monsters
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -234,7 +234,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: 1
-  playerBoat: {fileID: 0}
+  playerBoat: {fileID: 5010979985590768056, guid: a2a12c9c66944cd4fac07270973c6a68, type: 3}
 --- !u!114 &5296950560004953180
 MonoBehaviour:
   m_ObjectHideFlags: 0
