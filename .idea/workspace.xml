@@ -26,26 +26,19 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="55a90b99-f2c2-4e2a-b5a2-fc6ca339c588" name="Default Changelist" comment="Edit account table auto fills your details that you can then change. The stats page has a table ready for the code to submit the stats next.">
+    <list default="true" id="55a90b99-f2c2-4e2a-b5a2-fc6ca339c588" name="Default Changelist" comment="Start of the change account details.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Website/public/about_us.php" beforeDir="false" afterPath="$PROJECT_DIR$/Website/public/about_us.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Website/public/contact_us.php" beforeDir="false" afterPath="$PROJECT_DIR$/Website/public/contact_us.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Website/public/download.php" beforeDir="false" afterPath="$PROJECT_DIR$/Website/public/download.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Website/public/edit_account.php" beforeDir="false" afterPath="$PROJECT_DIR$/Website/public/edit_account.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Website/public/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/Website/public/index.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Website/public/leaderboard.php" beforeDir="false" afterPath="$PROJECT_DIR$/Website/public/leaderboard.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Website/public/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/Website/public/login.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Website/public/news.php" beforeDir="false" afterPath="$PROJECT_DIR$/Website/public/news.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Website/public/password_reset.php" beforeDir="false" afterPath="$PROJECT_DIR$/Website/public/password_reset.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Website/public/register.php" beforeDir="false" afterPath="$PROJECT_DIR$/Website/public/register.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Website/public/stats.php" beforeDir="false" afterPath="$PROJECT_DIR$/Website/public/stats.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Website/public/welcome.php" beforeDir="false" afterPath="$PROJECT_DIR$/Website/public/welcome.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="ChangesViewManager" show_ignored="true" />
   <component name="ComposerSettings">
     <execution />
   </component>
@@ -121,7 +114,8 @@
       <workItem from="1615989817756" duration="9474000" />
       <workItem from="1616585458664" duration="3192000" />
       <workItem from="1616588705828" duration="212000" />
-      <workItem from="1616594640361" duration="2965000" />
+      <workItem from="1616594640361" duration="3228000" />
+      <workItem from="1617280797425" duration="7417000" />
     </task>
     <task id="LOCAL-00001" summary="Website file structure">
       <created>1605104557576</created>
@@ -263,7 +257,14 @@
       <option name="project" value="LOCAL" />
       <updated>1616588905404</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="Start of the change account details.">
+      <created>1616597671562</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1616597671562</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -314,6 +315,7 @@
     <MESSAGE value="All pages have the new added stats page nav bar button that will only appear if the user is logged in." />
     <MESSAGE value="Edit account table auto fills your details that you can then change. The stats page has a table ready for the code to submit the code next." />
     <MESSAGE value="Edit account table auto fills your details that you can then change. The stats page has a table ready for the code to submit the stats next." />
-    <option name="LAST_COMMIT_MESSAGE" value="Edit account table auto fills your details that you can then change. The stats page has a table ready for the code to submit the stats next." />
+    <MESSAGE value="Start of the change account details." />
+    <option name="LAST_COMMIT_MESSAGE" value="Start of the change account details." />
   </component>
 </project>

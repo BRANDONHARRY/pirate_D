@@ -8,56 +8,73 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 
 require_once  "config.php";
 
-$new_email = "";
 $new_firstname = "";
 $new_lastname = "";
 $new_username = "";
+$new_email = "";
 
-$new_email_err = "";
 $new_firstname_err = "";
 $new_lastname_err = "";
 $new_username_err = "";
+$new_email_err = "";
 
 
 if($_SERVER["REQUEST_METHOD"] == "POST") {
-    $new_email = trim($_POST["new_email"]);
-    $new_firstname = trim($_POST["new_firstname"]);
-    $new_lastname = trim($_POST["new_lastname"]);
-    $new_username = trim($_POST["new_username"]);
+    if (empty(trim($_POST["new_firstname"]))) {
+        $new_firstname_err = "Please enter your first name.";
+    } else {
+        $new_firstname = trim($_POST["new_firstname"]);
+    }
 
-    echo "values been set";
+    if (empty(trim($_POST["new_lastname"]))) {
+        $new_lastname_err = "Please enter your last name.";
+    } else {
+        $new_lastname = trim($_POST["new_lastname"]);
+    }
+
+    if (empty(trim($_POST["new_username"]))) {
+        $new_username_err = "Please enter your username.";
+    } else {
+        $new_username = trim($_POST["new_username"]);
+    }
+
+    if (empty(trim($_POST["new_email"]))) {
+        $new_email_err = "Please enter your email.";
+    } else {
+        $new_email = trim($_POST["new_email"]);
+    }
 
     // Check input errors
-    if (empty($new_email) && empty($new_firstname)  && empty($new_lastname) && empty($new_username)){
+    if (isset($new_firstname)  && isset($new_lastname) && isset($new_username) && isset($new_email) ){
         // Prepare an update statement
-        $query = "call comp2003_d.updateuser(?, ?, ?, ?, ?, ?)";
-        echo "query made";
+        $query = "call comp2003_d.updateUserDetails(?, ?, ?, ?, ?)";
 
         if ($stmt = mysqli_prepare($con, $query)) {
-            echo " connected ";
-            // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "isssss", $param_id, $param_firstname, $param_lastname, $param_username, $param_email, $param_password);
-            echo " bind varibles ";
+            mysqli_stmt_bind_param($stmt, "issss", $param_id, $param_firstname, $param_lastname, $param_username, $param_email);
 
             // Set parameters
-            $param_id = $_SESSION["id"];
+            $param_id = $_SESSION["userID"];
             $param_firstname = $new_firstname;
             $param_lastname = $new_lastname;
             $param_username = $new_username;
             $param_email = $new_email;
-            $param_password = "randompassword";
+
+            $_SESSION["firstName"] = $new_firstname;
+            $_SESSION["lastName"] = $new_lastname;
+            $_SESSION["username"] = $new_username;
+            $_SESSION["email"] = $new_email;
 
             echo " set parameters ";
+            echo $param_id, $param_firstname,$param_lastname,$param_username,$param_email;
 
             if(mysqli_stmt_execute($stmt)){
 //              Account updated
-                session_destroy();
-                header("location: login.php");
+                header("location: welcome.php");
             } else{
                 echo ("Something went wrong try again.");
             }
-            mysqli_stmt_close();
         }
+        mysqli_stmt_close($stmt);
     }
     mysqli_close($con);
 }

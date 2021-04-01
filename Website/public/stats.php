@@ -8,30 +8,50 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 
 require_once  "config.php";
 
-$new_password = "";
-$confirm_password = "";
-$new_password_err = "";
-$confirm_password_err = "";
+$highscore = 0;
+$kills = 0;
+$time = 0;
+$ballsFired = 0;
+$chestsCollected = 0;
+
+$highscore_err = "";
+$kills_err = "";
+$time_err = "";
+$ballsFired_err = "";
+$chestsCollected_err = "";
+
 
 if($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Validate new password
-    if (empty(trim($_POST["new_password"]))) {
-        $new_password_err = "Please enter the new password.";
-    } elseif (strlen(trim($_POST["new_password"])) < 6) {
-        $new_password_err = "Password must have atleast 6 characters.";
-    } else {
-        $new_password = trim($_POST["new_password"]);
+    if(empty(trim($_POST["highscore"]))){
+        $highscore_err = "Please enter your highscore";
+    } else{
+        $highscore = trim($_POST["highscore"]);
     }
 
-    // Validate confirm password
-    if (empty(trim($_POST["confirm_password"]))) {
-        $confirm_password_err = "Please confirm the password.";
-    } else {
-        $confirm_password = trim($_POST["confirm_password"]);
-        if (empty($new_password_err) && ($new_password != $confirm_password)) {
-            $confirm_password_err = "Password did not match.";
-        }
+    if(empty(trim($_POST["kills"]))){
+        $kills_err = "Please enter the number of balls kills";
+    } else{
+        $kills = trim($_POST["kills"]);
     }
+
+    if(empty(trim($_POST["time"]))){
+        $time_err = "Please enter your time survived";
+    } else{
+        $time = trim($_POST["time"]);
+    }
+
+    if(empty(trim($_POST["ballsFired"]))){
+        $ballsFired_err = "Please enter the number of balls fired";
+    } else{
+        $ballsFired = trim($_POST["ballsFired"]);
+    }
+
+    if(empty(trim($_POST["chestsCollected"]))){
+        $chestsCollected_err = "Please enter the number of chests collected";
+    } else{
+        $chestsCollected = trim($_POST["chestsCollected"]);
+    }
+
 
     // Check input errors
     if (empty($new_password_err) && empty($confirm_password_err)) {
@@ -158,52 +178,52 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <div class="form-group
-                <?php echo (!empty($new_password_err)) ? 'has-error' : ''; ?>">
+                <?php echo (!empty($highscore_err)) ? 'has-error' : ''; ?>">
                 <label>High Score</label>
-                <input type="number" name="new_password" class="form-control" value="<?php echo $new_password; ?>">
+                <input type="number" name="highscore" class="form-control" value="<?php echo $highscore; ?>">
 
                 <span class="help-block">
-                    <?php echo $new_password_err; ?>
+                    <?php echo $highscore_err; ?>
                 </span>
             </div>
 
             <div class="form-group
-                <?php echo (!empty($confirm_password_err)) ? 'has-error' : ''; ?>">
+                <?php echo (!empty($kills_err)) ? 'has-error' : ''; ?>">
                 <label>Kills</label>
-                <input type="number" name="confirm_password" class="form-control">
+                <input type="number" name="kills" class="form-control" value="<?php echo $kills; ?>">
 
                 <span class="help-block">
-                    <?php echo $confirm_password_err; ?>
+                    <?php echo $kills_err; ?>
                 </span>
             </div>
 
             <div class="form-group
-                <?php echo (!empty($confirm_password_err)) ? 'has-error' : ''; ?>">
+                <?php echo (!empty($time_err)) ? 'has-error' : ''; ?>">
                 <label>Time Survived</label>
-                <input type="number" name="confirm_password" class="form-control">
+                <input type="number" name="time" class="form-control" value="<?php echo $time; ?>">
 
                 <span class="help-block">
-                    <?php echo $confirm_password_err; ?>
+                    <?php echo $time_err; ?>
                 </span>
             </div>
 
             <div class="form-group
-                <?php echo (!empty($confirm_password_err)) ? 'has-error' : ''; ?>">
+                <?php echo (!empty($ballsFired_err)) ? 'has-error' : ''; ?>">
                 <label>Balls Fired</label>
-                <input type="number" name="confirm_password" class="form-control">
+                <input type="number" name="ballsFired" class="form-control" value="<?php echo $ballsFired; ?>">
 
                 <span class="help-block">
-                    <?php echo $confirm_password_err; ?>
+                    <?php echo $ballsFired_err; ?>
                 </span>
             </div>
 
             <div class="form-group
-                <?php echo (!empty($confirm_password_err)) ? 'has-error' : ''; ?>">
+                <?php echo (!empty($chestsCollected_err)) ? 'has-error' : ''; ?>">
                 <label>Chests Collected</label>
-                <input type="number" name="confirm_password" class="form-control">
+                <input type="number" name="chestsCollected" class="form-control" value="<?php echo $chestsCollected; ?>">
 
                 <span class="help-block">
-                    <?php echo $confirm_password_err; ?>
+                    <?php echo $chestsCollected_err; ?>
                 </span>
             </div>
 

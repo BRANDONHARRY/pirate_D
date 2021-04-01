@@ -21,8 +21,7 @@
             background-image: url("../assets/img/Game.png");
         }
         .footer {
-            position: sticky;
-            left: 0;
+            position: absolute;
             bottom: 0;
             width: 100%;
             height: 60px;
@@ -104,32 +103,28 @@
                 <div class="col-sm-12">
                     <h1>Leaderboard Data</h1>
                     <p>
-                        Below you can see all of the data that is displayed from csv file on the leaderboard.
+                        Below you can see all of the data that is displayed from a MySQL database storing all the stats of the leaderboard.
                     </p>
                     <p>
-                        Here you can see details about the person that has entered it into the database
-                        such as their username, first and last name.
+                        Here you can see details about who has submitted their scores along with their username and ID.
                     </p>
                     <p>
-                        Also you are able see the scores that they have achieved with information
-                        about their time survived, their high score and the amount of coins they have collected.
+                        With this you can then see their high score that they have achieved as well as the amount of kills they have gained, the time they were able to survive,
+                        how many balls they have fired and finally the number of chests they have looted.
                     </p>
                 </div>
             </div>
         </div>
 
         <?php
-        $server = "Proj-mysql.uopnet.plymouth.ac.uk";
-        $username = "COMP2003_D";
-        $password = "VitW270*";
-        $con = mysqli_connect($server, $username, $password);
-        $response = array();
+
+        require_once  "config.php";
 
         if ($con->connect_error) {
             die("Connection failed: " . $con->connect_error);
         }
-        $query = "SELECT * FROM comp2003_d.usertbl;";
-//        $query = "SELECT * FROM comp2003_d.viewstats;";
+
+        $query = "SELECT * FROM comp2003_d.viewstats;";
         $result = $con->query($query);
 
         if ($result->num_rows > 0) {
@@ -137,36 +132,41 @@
                         <table class='table table-bordered table-dark table-hover table-sm'>
                         <tr>
                             <th>User ID</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
                             <th>User Name</th>
-                            <th>Email</th>
-                            <th>Password</th>
+                            <th>High score</th>
+                            <th>Kills</th>
+                            <th>Time Survived</th>
+                            <th>Balls Fired</th>
+                            <th>Chests Collected</th>
                         </tr>
                     ";
-
             while ($row = $result->fetch_assoc()) {
-                echo"   <tr>
+                echo "   <tr>
                             <td>" . $row["userID"] . "</td>
-                            <td>" . $row["firstName"] . "</td>
-                            <td>" . $row["lastName"] . "</td>
-                            <td>" . $row["username"] . "</td>
-                            <td>" . $row["email"] . "</td>
-                            <td>" . $row["password"] . "</td>
+                            <td>" . $row["Username"] . "</td>
+                            <td>" . $row["High Score"] . "</td>
+                            <td>" . $row["Kills"] . "</td>
+                            <td>" . $row["Time"] . "</td>
+                            <td>" . $row["Balls Fired"] . "</td>
+                            <td>" . $row["Chests Collected"] . "</td>
                         </tr>";
             }
+            echo "</table></div>";
         } else {
             echo "0 results";
         }
         ?>
 
-        <footer class="footer">
-                <div class="container">
-                        <span class="text-muted">
-                            Created by COMP2003 Group_D. Link to Github:
-                            <a href="https://github.com/BRANDONHARRY/COMP2003_pirate_D">https://github.com/BRANDONHARRY/COMP2003_pirate_D</a>
-                        </span>
-                </div>
-        </footer>
+
     </body>
+
+    <footer class="footer">
+            <div class="container">
+                    <span class="text-muted">
+                        Created by COMP2003 Group_D. Link to Github:
+                        <a href="https://github.com/BRANDONHARRY/COMP2003_pirate_D">https://github.com/BRANDONHARRY/COMP2003_pirate_D</a>
+                    </span>
+            </div>
+    </footer>
+
 </html>
