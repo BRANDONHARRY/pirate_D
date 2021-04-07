@@ -17,7 +17,7 @@ public class SetStats : MonoBehaviour
         Score.text = "Score: " + Convert.ToString(DataHandler.getScore());
         Kills.text = "Enemies Defeated: " + Convert.ToString(DataHandler.getKills());
         Treasure.text = "Treasure Chests Collected: " + Convert.ToString(DataHandler.getTreasure());
-        Time.text = "Time Survived: " + Convert.ToString(DataHandler.getTime()) + "seconds";
+        Time.text = "Time Survived: " + Convert.ToString(DataHandler.getTime()) + " seconds";
         Shots.text = "Cannonballs Fired: " + Convert.ToString(DataHandler.getShots());
 
     }

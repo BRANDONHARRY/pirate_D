@@ -20,6 +20,7 @@ public class SeaMonsterScore : MonoBehaviour
 
     public void KillScore()
     {
+        playerBoat = GameObject.FindGameObjectWithTag("Player");
         DataHandler.addKill();
         playerBoat.transform.SendMessage("AddScore", score, SendMessageOptions.DontRequireReceiver);
     }
