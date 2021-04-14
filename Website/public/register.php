@@ -114,7 +114,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
     // Check input errors before inserting in database
     if(empty($email_err) && empty($password_err) && empty($confirm_password_err) && empty($firstName_err) && empty($lastName_err) && empty($username_err)){
-        $query = "INSERT INTO comp2003_d.usertbl (firstName, lastName, username, email, password) VALUES (?,?,?,?,?);";
+        $query = "call comp2003_d.register(?, ?, ?, ?, ?);";
+//        $query = "INSERT INTO comp2003_d.usertbl (firstName, lastName, username, email, password) VALUES (?,?,?,?,?);";
 
         if($stmt = mysqli_prepare($con,$query)){
             // Bind variables to the prepared statement as parameters

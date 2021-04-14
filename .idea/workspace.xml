@@ -26,11 +26,9 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="55a90b99-f2c2-4e2a-b5a2-fc6ca339c588" name="Default Changelist" comment="Start of the change account details.">
+    <list default="true" id="55a90b99-f2c2-4e2a-b5a2-fc6ca339c588" name="Default Changelist" comment="Edit account now working. The leaderboard now displays the called viewstats from the database. Starting working on the stats page more.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Website/public/edit_account.php" beforeDir="false" afterPath="$PROJECT_DIR$/Website/public/edit_account.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Website/public/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/Website/public/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Website/public/leaderboard.php" beforeDir="false" afterPath="$PROJECT_DIR$/Website/public/leaderboard.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Website/public/register.php" beforeDir="false" afterPath="$PROJECT_DIR$/Website/public/register.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Website/public/stats.php" beforeDir="false" afterPath="$PROJECT_DIR$/Website/public/stats.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -115,7 +113,9 @@
       <workItem from="1616585458664" duration="3192000" />
       <workItem from="1616588705828" duration="212000" />
       <workItem from="1616594640361" duration="3228000" />
-      <workItem from="1617280797425" duration="7417000" />
+      <workItem from="1617280797425" duration="8141000" />
+      <workItem from="1617887311542" duration="456000" />
+      <workItem from="1618401326444" duration="4224000" />
     </task>
     <task id="LOCAL-00001" summary="Website file structure">
       <created>1605104557576</created>
@@ -264,7 +264,14 @@
       <option name="project" value="LOCAL" />
       <updated>1616597671562</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="Edit account now working. The leaderboard now displays the called viewstats from the database. Starting working on the stats page more.">
+      <created>1617288644205</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1617288644205</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -316,6 +323,7 @@
     <MESSAGE value="Edit account table auto fills your details that you can then change. The stats page has a table ready for the code to submit the code next." />
     <MESSAGE value="Edit account table auto fills your details that you can then change. The stats page has a table ready for the code to submit the stats next." />
     <MESSAGE value="Start of the change account details." />
-    <option name="LAST_COMMIT_MESSAGE" value="Start of the change account details." />
+    <MESSAGE value="Edit account now working. The leaderboard now displays the called viewstats from the database. Starting working on the stats page more." />
+    <option name="LAST_COMMIT_MESSAGE" value="Edit account now working. The leaderboard now displays the called viewstats from the database. Starting working on the stats page more." />
   </component>
 </project>

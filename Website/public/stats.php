@@ -52,28 +52,30 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         $chestsCollected = trim($_POST["chestsCollected"]);
     }
 
-
     // Check input errors
-    if (empty($new_password_err) && empty($confirm_password_err)) {
-        // Prepare an update statement
-        $query = "UPDATE comp2003_d.usertbl SET password = ? WHERE userID = ?";
+    if (empty($highscore_err) && empty($kills_err) && empty($time_err) && empty($ballsFired_err) && empty($chestsCollected_err)) {
+
+        $query = "call comp2003_d.insertStats(?, ?, ?, ?, ?, ?);";
 
         if ($stmt = mysqli_prepare($con, $query)) {
             // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "si", $param_password, $param_id);
+            mysqli_stmt_bind_param($stmt, "iiiiii", $id, $param_highscore, $param_kills, $param_time, $param_balls, $param_chests);
 
             // Set parameters
-            $param_password = password_hash($new_password, PASSWORD_DEFAULT);
-            $param_id = $_SESSION["id"];
+            $id = $_SESSION["userID"];
+            $param_highscore = $highscore;
+            $param_kills = $kills;
+            $param_time = $time;
+            $param_balls = $ballsFired;
+            $param_chests = $chestsCollected;
 
             if(mysqli_stmt_execute($stmt)){
-//              Password updated
-                session_destroy();
-                header("location: login.php");
+//              Stats been submited
+
             } else{
                 echo ("Something went wrong try again.");
             }
-            mysqli_stmt_close();
+            mysqli_stmt_close($stmt);
         }
     }
     mysqli_close($con);
@@ -105,8 +107,59 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             line-height: 60px;
             background-color: #343a40;
         }
+        .popup {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+        }
+        .popup .popuptext {
+            visibility: hidden;
+            width: 160px;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 8px 0;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -80px;
+        }
 
+        .popup .popuptext::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #555 transparent transparent transparent;
+        }
+
+        .popup .show {
+            visibility: visible;
+            -webkit-animation: fadeIn 1s;
+            animation: fadeIn 1s
+        }
+
+        @-webkit-keyframes fadeIn {
+            from {opacity: 0;}
+            to {opacity: 1;}
+        }
+
+        @keyframes fadeIn {
+            from {opacity: 0;}
+            to {opacity:1 ;}
+        }
     </style>
+    <script>
+        function myFunction() {
+            var popup = document.getElementById("myPopup");
+            popup.classList.toggle("show");
+        }
+    </script>
 </head>
 
 <body>
@@ -227,10 +280,17 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                 </span>
             </div>
 
-
+            <div class="popup" onclick="myFunction()">
+                Click me!
+                <span class="popuptext" id="myPopup">Your stats have been submitted!</span>
+            </div>
 
             <div class="form-group">
-                <input type="submit" class="btn btn-primary" value="Submit">
+                <div class="popup" onclick="myFunction()">
+                    <input type="submit" class="btn btn-primary" value="Submit">
+                    <span class="popuptext" id="myPopup">Your stats have been submitted!</span>
+                </div>
+
                 <a class="btn btn-link" href="welcome.php">Cancel</a>
             </div>
         </form>
