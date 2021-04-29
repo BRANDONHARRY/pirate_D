@@ -19,9 +19,9 @@ $password_err = "";
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty(trim($_POST["email"]))) {
-        $username_err = "Please enter your email.";
+        $email_err = "Please enter your email.";
     } else {
-        $username = trim($_POST["email"]);
+        $email = trim($_POST["email"]);
     }
 
     if (empty(trim($_POST["password"]))) {
@@ -32,54 +32,55 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Validate credentials
     if (empty($email_err) && empty($password_err)) {
-        $query = "SELECT userID, firstName, lastName, username, email, password FROM comp2003_d.usertbl WHERE email = ?";
+        $email_check = "SELECT userID, firstName, lastName, username, email FROM comp2003_d.usertbl WHERE email = ?";
+        $login_query = "call comp2003_d.login(?, ?)";
 
-        if ($stmt = mysqli_prepare($con, $query)) {
-            mysqli_stmt_bind_param($stmt, "s", $checkEmail);
-
-            // Set parameters
-            $checkEmail = trim($_POST["email"]);
+        // Checks if the email is valid
+        if ($stmt = mysqli_prepare($con, $email_check)) {
+            mysqli_stmt_bind_param($stmt, "s", $email);
 
             if (mysqli_stmt_execute($stmt)) {
                 mysqli_stmt_store_result($stmt);
 
                 if (mysqli_stmt_num_rows($stmt) > 0) {
-                    mysqli_stmt_bind_result($stmt, $userID, $firstName, $lastName, $username, $email, $hashed_password);
+                    mysqli_stmt_bind_result($stmt, $userID, $firstName, $lastName, $username, $email);
 
-                    if (mysqli_stmt_fetch($stmt)) {
-                        if (password_verify($password, $hashed_password)) {
+                    if (mysqli_stmt_fetch($stmt)){
+                        if ($stmt = mysqli_prepare($con, $login_query)) {
+                            mysqli_stmt_bind_param($stmt, "ss", $email, $password);
 
-                            session_start();
+                            if (mysqli_stmt_execute($stmt)) {
+                                mysqli_stmt_store_result($stmt);
 
-                            // Store data in session variables
-                            $_SESSION["loggedin"] = true;
-                            $_SESSION["userID"] = $userID;
-                            $_SESSION["firstName"] = $firstName;
-                            $_SESSION["lastName"] = $lastName;
-                            $_SESSION["username"] = $username;
-                            $_SESSION["email"] = $email;
+                                if (mysqli_stmt_num_rows($stmt) > 0) {
+                                    session_start();
 
+                                    // Store data in session variables
+                                    $_SESSION["loggedin"] = true;
+                                    $_SESSION["userID"] = $userID;
+                                    $_SESSION["firstName"] = $firstName;
+                                    $_SESSION["lastName"] = $lastName;
+                                    $_SESSION["username"] = $username;
+                                    $_SESSION["email"] = $email;
 
-                            // Redirect user to welcome page
-                            header("location: welcome.php");
+                                    // Redirect user to welcome page
+                                    header("location: welcome.php");
 
-                        } else {
-                            // Display an error message if password is not valid
-                            $password_err = "The password you entered was not valid.";
+                                }else {
+                                    $password_err = "The password you entered was not valid.";
+                                }
+                            }
                         }
                     }
                 }
-                else {
-                    // Display an error message if username doesn't exist
-                    $username_err = "No account found with that username.";
-                }
-            } else {
-                echo "Something went wrong. Please try again later.";
+            } else{
+                    $email_err = "No account found with that email.";
             }
-            mysqli_stmt_close($stmt);
+        } else{
+                echo "Something went wrong. Please try again later.";
         }
+        mysqli_close($con);
     }
-    mysqli_close($con);
 }
 ?>
 

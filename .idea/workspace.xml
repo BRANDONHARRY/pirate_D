@@ -26,8 +26,10 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="55a90b99-f2c2-4e2a-b5a2-fc6ca339c588" name="Default Changelist" comment="Edit account now working. The leaderboard now displays the called viewstats from the database. Starting working on the stats page more.">
+    <list default="true" id="55a90b99-f2c2-4e2a-b5a2-fc6ca339c588" name="Default Changelist" comment="Stats page now submits to the stats table in the database. With a little popup added.">
+      <change afterPath="$PROJECT_DIR$/Website/public/ta.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Website/public/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/Website/public/login.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Website/public/register.php" beforeDir="false" afterPath="$PROJECT_DIR$/Website/public/register.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Website/public/stats.php" beforeDir="false" afterPath="$PROJECT_DIR$/Website/public/stats.php" afterDir="false" />
     </list>
@@ -63,7 +65,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/Website/assets/data" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Website/public" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -71,12 +73,13 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="settings.editor.selected.configurable" value="web-ide.project.structure" />
+    <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php" />
     <property name="two.files.diff.last.used.folder" value="$PROJECT_DIR$" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Programs\Ampps\www\COMP2003_pirate_D\Website\public" />
       <recent name="D:\Programs\Ampps\www\COMP2003_pirate_D\Website\assets\data" />
       <recent name="D:\Programs\Ampps\www\COMP2003_pirate_D\Website\assets\img" />
     </key>
@@ -115,7 +118,13 @@
       <workItem from="1616594640361" duration="3228000" />
       <workItem from="1617280797425" duration="8141000" />
       <workItem from="1617887311542" duration="456000" />
-      <workItem from="1618401326444" duration="4224000" />
+      <workItem from="1618401326444" duration="4297000" />
+      <workItem from="1618406882732" duration="41000" />
+      <workItem from="1618943010709" duration="1342000" />
+      <workItem from="1618944945005" duration="4646000" />
+      <workItem from="1619010374562" duration="2224000" />
+      <workItem from="1619615280932" duration="10734000" />
+      <workItem from="1619691554547" duration="1753000" />
     </task>
     <task id="LOCAL-00001" summary="Website file structure">
       <created>1605104557576</created>
@@ -271,7 +280,14 @@
       <option name="project" value="LOCAL" />
       <updated>1617288644205</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Stats page now submits to the stats table in the database. With a little popup added.">
+      <created>1618406814363</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1618406814363</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -324,6 +340,11 @@
     <MESSAGE value="Edit account table auto fills your details that you can then change. The stats page has a table ready for the code to submit the stats next." />
     <MESSAGE value="Start of the change account details." />
     <MESSAGE value="Edit account now working. The leaderboard now displays the called viewstats from the database. Starting working on the stats page more." />
-    <option name="LAST_COMMIT_MESSAGE" value="Edit account now working. The leaderboard now displays the called viewstats from the database. Starting working on the stats page more." />
+    <MESSAGE value="Stats page now submits to the stats table in the database. With a little popup added." />
+    <option name="LAST_COMMIT_MESSAGE" value="Stats page now submits to the stats table in the database. With a little popup added." />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

@@ -280,11 +280,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                 </span>
             </div>
 
-            <div class="popup" onclick="myFunction()">
-                Click me!
-                <span class="popuptext" id="myPopup">Your stats have been submitted!</span>
-            </div>
-
             <div class="form-group">
                 <div class="popup" onclick="myFunction()">
                     <input type="submit" class="btn btn-primary" value="Submit">
