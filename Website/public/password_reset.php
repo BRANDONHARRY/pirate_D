@@ -36,15 +36,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     // Check input errors
     if (empty($new_password_err) && empty($confirm_password_err)) {
         // Prepare an update statement
-        $query = "UPDATE comp2003_d.usertbl SET password = ? WHERE userID = ?";
+        $query = "call comp2003_d.resetPassword(?, ?)";
 
         if ($stmt = mysqli_prepare($con, $query)) {
             // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "si", $param_password, $param_id);
-
-            // Set parameters
-            $param_password = password_hash($new_password, PASSWORD_DEFAULT);
-            $param_id = $_SESSION["id"];
+            mysqli_stmt_bind_param($stmt, "is",$_SESSION["userID"], $new_password);
 
             if(mysqli_stmt_execute($stmt)){
 //              Password updated
@@ -53,7 +49,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             } else{
               echo ("Something went wrong try again.");
             }
-            mysqli_stmt_close();
+            mysqli_stmt_close($stmt);
         }
     }
     mysqli_close($con);

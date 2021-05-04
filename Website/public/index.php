@@ -112,10 +112,11 @@
             <div class="col-sm-1">
                 <a href="leaderboard.php" class="btn btn-info">View Leaderboard</a>
             </div>
+
             <div class="col-sm-2">
                 <a href="stats.php" class="btn btn-primary">Submit your score</a>
             </div>
-            <div class="col-sm-8"></div>
+
         </div>
 
     </div>

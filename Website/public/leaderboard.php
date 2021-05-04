@@ -21,7 +21,7 @@
             background-image: url("../assets/img/Game.png");
         }
         .footer {
-            position: absolute;
+            position: fixed;
             bottom: 0;
             width: 100%;
             height: 60px;

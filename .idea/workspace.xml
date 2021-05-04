@@ -26,12 +26,11 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="55a90b99-f2c2-4e2a-b5a2-fc6ca339c588" name="Default Changelist" comment="Stats page now submits to the stats table in the database. With a little popup added.">
-      <change afterPath="$PROJECT_DIR$/Website/public/ta.php" afterDir="false" />
+    <list default="true" id="55a90b99-f2c2-4e2a-b5a2-fc6ca339c588" name="Default Changelist" comment="Register page now uses new stored procedure that will automatically hash the password in the procedure. Meaning no php hash function is used.&#10;&#10;The login page has now been updated to use the new login stored procedure that will verify if the email is valid if so will check the password.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Website/public/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/Website/public/login.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Website/public/register.php" beforeDir="false" afterPath="$PROJECT_DIR$/Website/public/register.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Website/public/stats.php" beforeDir="false" afterPath="$PROJECT_DIR$/Website/public/stats.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Website/public/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/Website/public/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Website/public/leaderboard.php" beforeDir="false" afterPath="$PROJECT_DIR$/Website/public/leaderboard.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Website/public/password_reset.php" beforeDir="false" afterPath="$PROJECT_DIR$/Website/public/password_reset.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -124,7 +123,10 @@
       <workItem from="1618944945005" duration="4646000" />
       <workItem from="1619010374562" duration="2224000" />
       <workItem from="1619615280932" duration="10734000" />
-      <workItem from="1619691554547" duration="1753000" />
+      <workItem from="1619691554547" duration="3208000" />
+      <workItem from="1619695435218" duration="1657000" />
+      <workItem from="1620064095394" duration="68000" />
+      <workItem from="1620142599090" duration="1540000" />
     </task>
     <task id="LOCAL-00001" summary="Website file structure">
       <created>1605104557576</created>
@@ -287,7 +289,14 @@
       <option name="project" value="LOCAL" />
       <updated>1618406814363</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="Register page now uses new stored procedure that will automatically hash the password in the procedure. Meaning no php hash function is used.&#10;&#10;The login page has now been updated to use the new login stored procedure that will verify if the email is valid if so will check the password.">
+      <created>1619693695989</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1619693695989</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -341,7 +350,8 @@
     <MESSAGE value="Start of the change account details." />
     <MESSAGE value="Edit account now working. The leaderboard now displays the called viewstats from the database. Starting working on the stats page more." />
     <MESSAGE value="Stats page now submits to the stats table in the database. With a little popup added." />
-    <option name="LAST_COMMIT_MESSAGE" value="Stats page now submits to the stats table in the database. With a little popup added." />
+    <MESSAGE value="Register page now uses new stored procedure that will automatically hash the password in the procedure. Meaning no php hash function is used.&#10;&#10;The login page has now been updated to use the new login stored procedure that will verify if the email is valid if so will check the password." />
+    <option name="LAST_COMMIT_MESSAGE" value="Register page now uses new stored procedure that will automatically hash the password in the procedure. Meaning no php hash function is used.&#10;&#10;The login page has now been updated to use the new login stored procedure that will verify if the email is valid if so will check the password." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
