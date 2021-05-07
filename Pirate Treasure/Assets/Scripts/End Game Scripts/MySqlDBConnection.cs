@@ -6,6 +6,7 @@ using System;
 using System.Data;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 
 public class MySqlDBConnection : MonoBehaviour
 {
@@ -14,7 +15,9 @@ public class MySqlDBConnection : MonoBehaviour
     //Table column names
     //string ID, Name, Score, EnemiesDefeated, TreasureCollected, TimeSurvived, CannonballsFired;
     string emailInput, passwordInput, userIDVal;
-    public Text currentScore, currentKills, currentChests, currentTime, currentShots;
+    public Text currentScore, currentKills, currentChests, currentTime, currentShots, infoText, currentStats;
+    public InputField emailIn, passwordIn;
+    public Button loginButton, submitNewButton, keepOldButton;
 
     bool saving;
     bool loading;
@@ -80,7 +83,7 @@ public class MySqlDBConnection : MonoBehaviour
 
         try
         {
-            query = "SELECT userID, email, password FROM usertbl WHERE email = '" + emailInput + "' AND password = '" + passwordInput+ "'" ;
+            query = "SELECT userID, email, password FROM usertbl WHERE email = '" + emailInput + "' AND password = '" + passwordInput+"'";
             if(con.State.ToString() != "Open")
             {
                 con.Open();
@@ -102,7 +105,69 @@ public class MySqlDBConnection : MonoBehaviour
                     }
                     else
                     {
-                        Debug.Log("Invalid Login");
+                        Debug.Log(query);
+                        Debug.Log(rdr.HasRows);
+                        Debug.Log("Invalid Login with credentials " +emailInput+ " and " + passwordInput);
+                        
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.Log(ex.ToString());
+        }
+    }
+    public void LoginCheckProcedure()
+    {
+        Debug.Log("Running Login Check");
+        bool valid = false;
+        emailInput = emailText.text;
+        passwordInput = passwordText.text;
+
+        string query = string.Empty;
+
+        try
+        {
+            query = "CALL comp2003_d.login()";
+            if (con.State.ToString() != "Open")
+            {
+                con.Open();
+            }
+            using (con)
+            {
+                using (cmd = new MySqlCommand(query, con))
+                {
+
+                    if (cmd.ExecuteNonQuery() == 1)
+                    {
+                        valid = true;
+                        Debug.Log("Login Valid!");
+                        query = "SELECT userID FROM usertbl WHERE email = '" + emailInput;
+                        using (cmd = new MySqlCommand(query, con))
+                        {
+                            rdr = cmd.ExecuteReader();
+                            if (rdr.HasRows)
+                            {
+                                userIDVal = rdr["userID"].ToString();
+
+                                GetCurrentStats();
+
+                            }
+                            else
+                            {
+                                Debug.Log("No Data Found");
+
+                            }
+                        }
+
+                        GetCurrentStats();
+
+                    }
+                    else
+                    {
+                        Debug.Log("Invalid Login with credentials " + emailInput + " and " + passwordInput);
+
                     }
                 }
             }
@@ -200,6 +265,11 @@ public class MySqlDBConnection : MonoBehaviour
                     {
                         while (rdr.Read())
                         {
+                            infoText.enabled = false;
+                            emailIn.enabled = false;
+                            passwordIn.enabled = false;
+                            loginButton.enabled = false;
+
                             currentScore.enabled = true;
                             currentScore.text = rdr["highScore"].ToString();
                             currentKills.enabled = true;
@@ -210,6 +280,10 @@ public class MySqlDBConnection : MonoBehaviour
                             currentTime.text = rdr["time"].ToString();
                             currentShots.enabled = true;
                             currentShots.text = rdr["ballsFired"].ToString();
+
+                            currentStats.enabled = true;
+                            keepOldButton.enabled = true;
+                            submitNewButton.enabled = true;
                         }
                     }
                 }
@@ -221,5 +295,36 @@ public class MySqlDBConnection : MonoBehaviour
             Debug.Log(ex.ToString());
         }
     }
+
+    //public void getHashes()
+    //{
+    //    string query = string.Empty;
+    //    try
+    //    {
+    //        query = "SELECT password FROM usertbl";
+    //        if (con.State.ToString() != "Open")
+    //            con.Open();
+    //        using (con)
+    //        {
+    //            using (cmd = new MySqlCommand(query, con))
+    //            {
+    //                rdr = cmd.ExecuteReader();
+    //                if (rdr.HasRows)
+    //                {
+    //                    while (rdr.Read())
+    //                    {
+    //                        Debug.Log(rdr["password"].ToString());
+    //                    }
+    //                }
+    //            }
+
+    //        }
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        Debug.Log(ex.ToString());
+    //    }
+    //}
+
 }
 
