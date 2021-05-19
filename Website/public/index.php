@@ -23,6 +23,13 @@
             line-height: 60px;
             background-color: #343a40;
         }
+        .touch{
+            position:absolute;
+        }
+        .touch2{
+            position:relative;
+            left: 160px;
+        }
     </style>
 </head>
 
@@ -108,24 +115,23 @@
         </div>
 
         <div class="row">
-            <div class="col-sm-1">
+            <div class="col-sm-1 touch">
                 <a href="leaderboard.php" class="btn btn-info">View Leaderboard</a>
             </div>
 
-            <div class="col-sm-2">
+            <div class="col-sm-2 touch2">
                 <a href="stats.php" class="btn btn-primary">Submit your score</a>
             </div>
-
         </div>
 
     </div>
 
-<footer class="footer">
-    <div class="container">
-            <span class="text-muted">Created by COMP2003 Group_D. Link to Github:
-            <a href="https://github.com/BRANDONHARRY/COMP2003_pirate_D">https://github.com/BRANDONHARRY/COMP2003_pirate_D</a></span>
-    </div>
-</footer>
+    <footer class="footer">
+        <div class="container">
+                <span class="text-muted">Created by COMP2003 Group_D. Link to Github:
+                <a href="https://github.com/BRANDONHARRY/COMP2003_pirate_D">https://github.com/BRANDONHARRY/COMP2003_pirate_D</a></span>
+        </div>
+    </footer>
 
 </body>
 </html>

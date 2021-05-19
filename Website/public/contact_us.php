@@ -122,7 +122,7 @@
 
             <tr>
                 <td>Daniel C Andrews</td>
-                <td><a href="https://www.google.com/" aria-label="dan student profile">Student Profile</a></td>
+                <td><a href="https://dle.plymouth.ac.uk/user/view.php?id=138113&course=47599" aria-label="dan student profile">Student Profile</a></td>
                 <td><a href="https://github.com/Hambush2" aria-label="dan github">GitHub</a></td>
             </tr>
         </table>

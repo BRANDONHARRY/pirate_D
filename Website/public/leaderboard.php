@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,6 +23,11 @@
                 height: 60px;
                 line-height: 60px;
                 background-color: #343a40;
+            }
+            br{
+                display: block;
+                content: "";
+                margin-top: 100px;
             }
         </style>
     </head>
@@ -155,6 +160,7 @@
             echo "0 results";
         }
         ?>
+        <br>
 
     <footer class="footer">
             <div class="container">

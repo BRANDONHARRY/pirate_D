@@ -16,7 +16,7 @@
             background-image: url("../assets/img/Game.png");
         }
         .footer {
-            position: absolute;
+            position: fixed;
             bottom: 0;
             width: 100%;
             height: 60px;
@@ -94,11 +94,9 @@
         <p>A website created by group_D</p>
     </div>
 
-    <div class="container">
-        <header class="text-black text-center">
-            <div class="container d-flex align-items-center flex-column">
-                <h1 class>RECENT UPDATES & ANNOUNCEMENTS</h1>
-            </div>
+    <div class="container text-left">
+        <header>
+                <h1>RECENT UPDATES & ANNOUNCEMENTS</h1>
         </header>
         <div class="text-left">
             <h2 style="font-size:25px">Release 1.0</h2>

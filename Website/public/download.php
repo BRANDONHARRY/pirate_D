@@ -16,12 +16,17 @@
                 background-image: url("../assets/img/Game.png");
             }
             .footer {
-                position: absolute;
+                position: fixed;
                 bottom: 0;
                 width: 100%;
                 height: 60px;
                 line-height: 60px;
                 background-color: #343a40;
+            }
+            br{
+                display: block;
+                content: "";
+                margin-top: 100px;
             }
         </style>
     </head>
@@ -93,17 +98,25 @@
             <img src="../assets/img/pirate_treasure.png" aria-label="logo">
             <p>A website created by group_D</p>
         </div>
-
-        <div class="container-fluid mt-5 px-5">
+        <div class="container text-center mt-5 px-5">
             <h1>
-                Here is a step to step guide into how to download our game.
+                Download guide
             </h1>
+            <h2>
+                Step 1:
+            </h2>
             <p>
-
+                Head to the github page shown below:
             </p>
+            <img src="../assets/img/step1.PNG" width="70%" height="70%" alt="banner">
+            <h2>
+                Step 2:
+            </h2>
+            <p>
+                Click on the "Pirate Treasure" to go into the following:
+            </p>
+            <img src="../assets/img/step2.PNG" width="70%" height="70%" alt="banner">
         </div>
-
-
 
         <footer class="footer">
             <div class="container">
@@ -111,5 +124,6 @@
                 <a href="https://github.com/BRANDONHARRY/COMP2003_pirate_D">https://github.com/BRANDONHARRY/COMP2003_pirate_D</a></span>
             </div>
         </footer>
+    <br>
     </body>
 </html>
