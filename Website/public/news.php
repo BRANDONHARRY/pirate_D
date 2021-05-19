@@ -23,6 +23,11 @@
             line-height: 60px;
             background-color: #343a40;
         }
+        br{
+            display: block;
+            content: "";
+            margin-top: 100px;
+        }
     </style>
 </head>
 
@@ -117,6 +122,12 @@
             <h2 style="font-size:25px">Release 2.0</h2>
             <p style="font-size:20px">Game now has new sea monsters that can now attack the player and make him lose life. Its also possible now get random amounts of treasure from the treasure chests found on the islands.</p>
         </div>
+        <div class="text-left">
+            <h2 style="font-size:25px">Release 3.0</h2>
+            <p style="font-size:20px">Game now has been updated to the final stage with everything working the way it should. This includes all player movement, randomly spawned enemies
+                to attack you and treasure chests. With the new features being the login system for the player to submit their scores. </p>
+        </div>
+        <br>
     </div>
 
 
