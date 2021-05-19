@@ -26,11 +26,20 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="55a90b99-f2c2-4e2a-b5a2-fc6ca339c588" name="Default Changelist" comment="Register page now uses new stored procedure that will automatically hash the password in the procedure. Meaning no php hash function is used.&#10;&#10;The login page has now been updated to use the new login stored procedure that will verify if the email is valid if so will check the password.">
+    <list default="true" id="55a90b99-f2c2-4e2a-b5a2-fc6ca339c588" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Website/public/about_us.php" beforeDir="false" afterPath="$PROJECT_DIR$/Website/public/about_us.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Website/public/contact_us.php" beforeDir="false" afterPath="$PROJECT_DIR$/Website/public/contact_us.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Website/public/download.php" beforeDir="false" afterPath="$PROJECT_DIR$/Website/public/download.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Website/public/edit_account.php" beforeDir="false" afterPath="$PROJECT_DIR$/Website/public/edit_account.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Website/public/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/Website/public/index.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Website/public/leaderboard.php" beforeDir="false" afterPath="$PROJECT_DIR$/Website/public/leaderboard.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Website/public/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/Website/public/login.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Website/public/news.php" beforeDir="false" afterPath="$PROJECT_DIR$/Website/public/news.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Website/public/password_reset.php" beforeDir="false" afterPath="$PROJECT_DIR$/Website/public/password_reset.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Website/public/register.php" beforeDir="false" afterPath="$PROJECT_DIR$/Website/public/register.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Website/public/stats.php" beforeDir="false" afterPath="$PROJECT_DIR$/Website/public/stats.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Website/public/welcome.php" beforeDir="false" afterPath="$PROJECT_DIR$/Website/public/welcome.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -126,7 +135,13 @@
       <workItem from="1619691554547" duration="3208000" />
       <workItem from="1619695435218" duration="1657000" />
       <workItem from="1620064095394" duration="68000" />
-      <workItem from="1620142599090" duration="1540000" />
+      <workItem from="1620142599090" duration="1804000" />
+      <workItem from="1620209787880" duration="819000" />
+      <workItem from="1620221099232" duration="72000" />
+      <workItem from="1620486368161" duration="4000" />
+      <workItem from="1620487384770" duration="1593000" />
+      <workItem from="1621348057832" duration="111000" />
+      <workItem from="1621419517630" duration="5399000" />
     </task>
     <task id="LOCAL-00001" summary="Website file structure">
       <created>1605104557576</created>
@@ -296,7 +311,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619693695989</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="Resetting the password now uses a newly created stored procedure that will again automatically hash the password.">
+      <created>1620145477331</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1620145477331</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -351,7 +373,8 @@
     <MESSAGE value="Edit account now working. The leaderboard now displays the called viewstats from the database. Starting working on the stats page more." />
     <MESSAGE value="Stats page now submits to the stats table in the database. With a little popup added." />
     <MESSAGE value="Register page now uses new stored procedure that will automatically hash the password in the procedure. Meaning no php hash function is used.&#10;&#10;The login page has now been updated to use the new login stored procedure that will verify if the email is valid if so will check the password." />
-    <option name="LAST_COMMIT_MESSAGE" value="Register page now uses new stored procedure that will automatically hash the password in the procedure. Meaning no php hash function is used.&#10;&#10;The login page has now been updated to use the new login stored procedure that will verify if the email is valid if so will check the password." />
+    <MESSAGE value="Resetting the password now uses a newly created stored procedure that will again automatically hash the password." />
+    <option name="LAST_COMMIT_MESSAGE" value="Resetting the password now uses a newly created stored procedure that will again automatically hash the password." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -1,34 +1,32 @@
-<?php
-?>
-<html>
+<!DOCTYPE html>
+<html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
         <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/sticky-footer/">
-        <link href="sticky-footer.css" rel="stylesheet">
 
         <title>Pirates Treasure - Leaderboard</title>
 
+        <style>
+            .header {
+                padding: 80px;
+                text-align: center;
+                color: white;
+                background-size:100% 100%;
+                background-image: url("../assets/img/Game.png");
+            }
+            .footer {
+                position: fixed;
+                bottom: 0;
+                width: 100%;
+                height: 60px;
+                line-height: 60px;
+                background-color: #343a40;
+            }
+        </style>
     </head>
-    <style>
-        .header {
-            padding: 80px;
-            text-align: center;
-            color: white;
-            background-size:100% 100%;
-            background-image: url("../assets/img/Game.png");
-        }
-        .footer {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            height: 60px;
-            line-height: 60px;
-            background-color: #343a40;
-        }
-    </style>
+
 
     <body>
         <div>
@@ -37,8 +35,9 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-                        <a class="navbar-brand" href="index.php"><img src="../assets/img/pirate.png" class="d-inline-block align-top"
-                                                                      width="77.5" height="56"></a>
+                        <a class="navbar-brand" href="index.php" aria-label="banner">
+                            <img src="../assets/img/pirate.png" class="d-inline-block align-top" width="78" height="56" alt="banner">
+                        </a>
 
                         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                             <li class="nav-item">
@@ -94,7 +93,7 @@
         </div>
 
         <div class="header">
-            <img src="../assets/img/pirate_treasure.png">
+            <img src="../assets/img/pirate_treasure.png" alt="logo">
             <p>A website created by group_D</p>
         </div>
 
@@ -157,9 +156,6 @@
         }
         ?>
 
-
-    </body>
-
     <footer class="footer">
             <div class="container">
                     <span class="text-muted">
@@ -168,5 +164,7 @@
                     </span>
             </div>
     </footer>
+
+    </body>
 
 </html>

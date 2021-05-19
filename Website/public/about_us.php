@@ -1,6 +1,5 @@
-<?php
-?>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -33,8 +32,9 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-            <a class="navbar-brand" href="index.php"><img src="../assets/img/pirate.png" class="d-inline-block align-top"
-                                                          width="77.5" height="56"></a>
+            <a class="navbar-brand" href="index.php" aria-label="banner">
+                <img src="../assets/img/pirate.png" class="d-inline-block align-top" width="78" height="56" alt="banner">
+            </a>
 
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class="nav-item">
@@ -86,28 +86,40 @@
                 </ul>';
             }
             ?>
+        </div>
     </nav>
 
     <div class="header">
-        <img src="../assets/img/pirate_treasure.png">
+        <img src="../assets/img/pirate_treasure.png" aria-label="logo">
         <p>A website created by group_D</p>
     </div>
-</body>
-<div class="container">
-<header class="text-black text-center">
-    <div class="container d-flex align-items-center flex-column">
-<h1 class>A bit of information about our team!</h1>
+
+    <div class="container">
+        <header class="text-black text-center">
+            <div class="container d-flex align-items-center flex-column">
+                <h1>
+                    A bit of information about our team!
+                </h1>
+            </div>
+        </header>
+
+        <div class="text-left text">
+            <p style="font-size:40px">
+                A group project for the COMP2003 module.
+            </p>
+            <p style="font-size:20px">
+                Regarding our team, we are a small group of 4 that love computing and are focused on creating great projects together.
+                Our game is called Pirate Treasure and is based on controlling a ship that has to collect random appearing treasures around the map,
+                making sure at the same time to watch out for the sea monsters that hunt you!
+            </p>
+        </div>
     </div>
-    <div class="text-left text">
-    <p style="font-size:40px">A group project for the COMP2003 module.</p>
-<p style="font-size:20px">Regarding our team, we are a small group of 4 that love computing and are focused on creating great projects together.
-Our game is called Pirate Treasure and is based on controlling a ship that has to collect random appearing treasures around the map, making sure at the same time
-to watch out for the sea monsters that hunt you!</p>
-    </div>
-    </div>
+
     <footer class="footer">
         <div class="container">
             <span class="text-muted">Created by COMP2003 Group_D. Link to Github:
             <a href="https://github.com/BRANDONHARRY/COMP2003_pirate_D">https://github.com/BRANDONHARRY/COMP2003_pirate_D</a></span>
         </div>
     </footer>
+</body>
+</html>

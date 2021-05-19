@@ -1,6 +1,5 @@
-<?php
-?>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -33,8 +32,9 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-            <a class="navbar-brand" href="index.php"><img src="../assets/img/pirate.png" class="d-inline-block align-top"
-                                                          width="77.5" height="56"></a>
+            <a class="navbar-brand" href="index.php" aria-label="banner">
+                <img src="../assets/img/pirate.png" class="d-inline-block align-top" width="78" height="56" alt="banner">
+            </a>
 
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class="nav-item">
@@ -71,7 +71,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="login.php">Account</a>
                     </li>
-                </ul>';
+                    </ul>';
             }
             else{
                 echo '<ul class="navbar-nav mt-2 mt-lg-0">
@@ -90,7 +90,7 @@
     </nav>
 
     <div class="header">
-        <img src="../assets/img/pirate_treasure.png">
+        <img src="../assets/img/pirate_treasure.png" aria-label="logo">
         <p>A website created by group_D</p>
     </div>
 
@@ -99,26 +99,26 @@
             <div class="container d-flex align-items-center flex-column">
                 <h1 class>RECENT UPDATES & ANNOUNCEMENTS</h1>
             </div>
-            <div class="text-left">
-                <h1 style="font-size:25px">Release 1.0</h1>
-                <p style="font-size:20px">Initial game release. Game is in a very early stage. Player movement has been inplemented.</p>
-            </div>
+        </header>
+        <div class="text-left">
+            <h2 style="font-size:25px">Release 1.0</h2>
+            <p style="font-size:20px">Initial game release. Game is in a very early stage. Player movement has been implemented.</p>
+        </div>
 
-            <div class="text-left">
-                <h1 style="font-size:25px">Update 1.1</h1>
-                <p style="font-size:20px">Game now includes new islands and additional controls for shooting cannon balls into sea monsters that should be included with the game into future updates!</p>
-            </div>
+        <div class="text-left">
+            <h2 style="font-size:25px">Update 1.1</h2>
+            <p style="font-size:20px">Game now includes new islands and additional controls for shooting cannon balls into sea monsters that should be included with the game into future updates!</p>
+        </div>
 
-            <div class="text-left">
-                <h1 style="font-size:25px">Update 1.2</h1>
-                <p style="font-size:20px">Game now includes treasures that can be found on the islands implemented on the previous update.</p>
-            </div>
+        <div class="text-left">
+            <h2 style="font-size:25px">Update 1.2</h2>
+            <p style="font-size:20px">Game now includes treasures that can be found on the islands implemented on the previous update.</p>
+        </div>
 
-            <div class="text-left">
-                <h1 style="font-size:25px">Release 2.0</h1>
-                <p style="font-size:20px">Game now has new sea monsters that can now attack the player and make him lose life. Its also possible now get random amounts of treasure from the treasure chests found on the islands.</p>
-            </div>
-
+        <div class="text-left">
+            <h2 style="font-size:25px">Release 2.0</h2>
+            <p style="font-size:20px">Game now has new sea monsters that can now attack the player and make him lose life. Its also possible now get random amounts of treasure from the treasure chests found on the islands.</p>
+        </div>
     </div>
 
 
@@ -128,3 +128,5 @@
             <a href="https://github.com/BRANDONHARRY/COMP2003_pirate_D">https://github.com/BRANDONHARRY/COMP2003_pirate_D</a></span>
         </div>
     </footer>
+</body>
+</html>

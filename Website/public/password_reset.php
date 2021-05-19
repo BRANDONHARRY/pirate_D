@@ -55,7 +55,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     mysqli_close($con);
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -189,4 +188,5 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             <a href="https://github.com/BRANDONHARRY/COMP2003_pirate_D">https://github.com/BRANDONHARRY/COMP2003_pirate_D</a></span>
     </div>
 </footer>
+</html>
 

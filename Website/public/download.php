@@ -1,6 +1,5 @@
-<?php
-?>
-<html>
+<!DOCTYPE html>
+<html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -33,8 +32,9 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-                <a class="navbar-brand" href="index.php"><img src="../assets/img/pirate.png" class="d-inline-block align-top"
-                                                              width="77.5" height="56"></a>
+                <a class="navbar-brand" href="index.php" aria-label="banner">
+                    <img src="../assets/img/pirate.png" class="d-inline-block align-top" width="78" height="56" alt="banner">
+                </a>
 
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                     <li class="nav-item">
@@ -90,7 +90,7 @@
         </nav>
 
         <div class="header">
-            <img src="../assets/img/pirate_treasure.png">
+            <img src="../assets/img/pirate_treasure.png" aria-label="logo">
             <p>A website created by group_D</p>
         </div>
 

@@ -1,6 +1,5 @@
-<?php
-?>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -33,8 +32,9 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-            <a class="navbar-brand" href="index.php"><img src="../assets/img/pirate.png" class="d-inline-block align-top"
-                                                          width="77.5" height="56"></a>
+            <a class="navbar-brand" href="index.php" aria-label="banner">
+                <img src="../assets/img/pirate.png" class="d-inline-block align-top" width="78" height="56" alt="banner">
+            </a>
 
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class="nav-item">
@@ -90,39 +90,40 @@
     </nav>
 
     <div class="header">
-        <img src="../assets/img/pirate_treasure.png">
+        <img src="../assets/img/pirate_treasure.png" alt="logo">
         <p>A website created by group_D</p>
     </div>
 
     <br>
 
     <div class="container">
+        <h1>Contact us here</h1>
         <table class="table table-bordered  table-hover table-sm">
             <tr>
                 <th>Person</th><th>Where to find them:</th><th></th>
             </tr>
             <tr>
                 <td>Alexandros Michalmpeis</td>
-                <td><a href="https://dle.plymouth.ac.uk/user/profile.php?id=140671">Student Profile</a></td>
-                <td><a href="https://github.com/michalmpeis">GitHub</a></td>
+                <td><a href="https://dle.plymouth.ac.uk/user/profile.php?id=140671" aria-label="alex student profile">Student Profile</a></td>
+                <td><a href="https://github.com/michalmpeis" aria-label="alex github">GitHub</a></td>
             </tr>
 
             <tr>
                 <td>Brandon Kent</td>
-                <td><a href="https://dle.plymouth.ac.uk/user/profile.php?id=138097/">Student Profile</a></td>
-                <td><a href="https://github.com/BRANDONHARRY">GitHub</a></td>
+                <td><a href="https://dle.plymouth.ac.uk/user/profile.php?id=138097/" aria-label="brandon student profile">Student Profile</a></td>
+                <td><a href="https://github.com/BRANDONHARRY" aria-label="brandon github">GitHub</a></td>
             </tr>
 
             <tr>
                 <td>Jack Opie</td>
-                <td><a href="https://dle.plymouth.ac.uk/user/profile.php?id=137750">Student Profile</a></td>
-                <td><a href="https://github.com/Jack0pie">GitHub</a></td>
+                <td><a href="https://dle.plymouth.ac.uk/user/profile.php?id=137750" aria-label="jack student profile">Student Profile</a></td>
+                <td><a href="https://github.com/Jack0pie" aria-label="jack github">GitHub</a></td>
             </tr>
 
             <tr>
                 <td>Daniel C Andrews</td>
-                <td><a href="https://www.google.com/">Student Profile</a></td>
-                <td><a href="https://github.com/Hambush2">GitHub</a></td>
+                <td><a href="https://www.google.com/" aria-label="dan student profile">Student Profile</a></td>
+                <td><a href="https://github.com/Hambush2" aria-label="dan github">GitHub</a></td>
             </tr>
         </table>
     </div>
@@ -133,3 +134,5 @@
                 <a href="https://github.com/BRANDONHARRY/COMP2003_pirate_D">https://github.com/BRANDONHARRY/COMP2003_pirate_D</a></span>
             </div>
         </footer>
+</body>
+</html>
