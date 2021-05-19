@@ -122,17 +122,17 @@
 
             <tr>
                 <td>Daniel C Andrews</td>
-                <td><a href="https://dle.plymouth.ac.uk/user/view.php?id=138113&course=47599" aria-label="dan student profile">Student Profile</a></td>
+                <td><a href="https://dle.plymouth.ac.uk/user/profile.php?id=138113" aria-label="dan student profile">Student Profile</a></td>
                 <td><a href="https://github.com/Hambush2" aria-label="dan github">GitHub</a></td>
             </tr>
         </table>
     </div>
 
-        <footer class="footer">
-            <div class="container">
-                <span class="text-muted">Created by COMP2003 Group_D. Link to Github:
-                <a href="https://github.com/BRANDONHARRY/COMP2003_pirate_D">https://github.com/BRANDONHARRY/COMP2003_pirate_D</a></span>
-            </div>
-        </footer>
+    <footer class="footer">
+        <div class="container">
+            <span class="text-muted">Created by COMP2003 Group_D. Link to Github:
+            <a href="https://github.com/BRANDONHARRY/COMP2003_pirate_D">https://github.com/BRANDONHARRY/COMP2003_pirate_D</a></span>
+        </div>
+    </footer>
 </body>
 </html>
