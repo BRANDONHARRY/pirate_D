@@ -4,7 +4,7 @@ using UnityEngine;
 
 public static class DataHandler
 {
-    private static int score, kills = 0, treasure = 0, shots = 0;
+    private static int score, kills = 0, treasure = 0, shots = 0, id = -1;
     private static float time = 0;
 
 
@@ -64,6 +64,15 @@ public static class DataHandler
     public static void addShot()
     {
         shots = shots + 1;
+    }
+
+    public static int getID()
+    {
+        return id;
+    }
+    public static void setID(int inID)
+    {
+        id = inID;
     }
     
 

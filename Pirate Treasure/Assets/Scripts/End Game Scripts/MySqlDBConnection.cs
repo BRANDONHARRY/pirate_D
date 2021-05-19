@@ -15,7 +15,7 @@ public class MySqlDBConnection : MonoBehaviour
     //Table column names
     //string ID, Name, Score, EnemiesDefeated, TreasureCollected, TimeSurvived, CannonballsFired;
     string emailInput, passwordInput, userIDVal;
-    public Text currentScore, currentKills, currentChests, currentTime, currentShots, infoText, currentStats;
+    public Text currentScore, currentKills, currentChests, currentTime, currentShots, infoText, invalidLoginText;
     public InputField emailIn, passwordIn;
     public Button loginButton, submitNewButton, keepOldButton;
 
@@ -129,7 +129,7 @@ public class MySqlDBConnection : MonoBehaviour
 
         try
         {
-            query = "CALL comp2003_d.login()";
+            query = "login";
             if (con.State.ToString() != "Open")
             {
                 con.Open();
@@ -138,20 +138,28 @@ public class MySqlDBConnection : MonoBehaviour
             {
                 using (cmd = new MySqlCommand(query, con))
                 {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@emailVar", emailInput);
+                    cmd.Parameters.AddWithValue("@passwordVar", passwordInput);
 
-                    if (cmd.ExecuteNonQuery() == 1)
+                    if (Convert.ToInt32(cmd.ExecuteScalar()) > 0)
                     {
                         valid = true;
                         Debug.Log("Login Valid!");
-                        query = "SELECT userID FROM usertbl WHERE email = '" + emailInput;
+                        invalidLoginText.gameObject.SetActive(false);
+                        query = "SELECT userID FROM usertbl WHERE email = @emailVar";
                         using (cmd = new MySqlCommand(query, con))
                         {
+                            cmd.Parameters.AddWithValue("@emailVar", emailInput);
                             rdr = cmd.ExecuteReader();
                             if (rdr.HasRows)
                             {
-                                userIDVal = rdr["userID"].ToString();
-
-                                GetCurrentStats();
+                                if (rdr.Read())
+                                {
+                                    userIDVal = rdr["userID"].ToString();
+                                    userIDVal = Convert.ToString(rdr.GetInt32(0));
+                                    DataHandler.setID(Convert.ToInt32(userIDVal));
+                                }
 
                             }
                             else
@@ -160,21 +168,27 @@ public class MySqlDBConnection : MonoBehaviour
 
                             }
                         }
-
-                        GetCurrentStats();
+                        rdr.Close();
+                        Debug.Log("Getting Stats");
+                        //GetCurrentStats();
+                        DisplayChange();
 
                     }
                     else
                     {
                         Debug.Log("Invalid Login with credentials " + emailInput + " and " + passwordInput);
+                        invalidLoginText.gameObject.SetActive(true);
 
                     }
                 }
             }
+            
         }
         catch (Exception ex)
         {
             Debug.Log(ex.ToString());
+            invalidLoginText.gameObject.SetActive(true);
+            invalidLoginText.text = ex.ToString();
         }
     }
 
@@ -205,6 +219,8 @@ public class MySqlDBConnection : MonoBehaviour
                     MySqlParameter firedParam = cmd.Parameters.Add("?Fired", MySqlDbType.VarChar);
                     firedParam.Value = DataHandler.getShots();
 
+                    Debug.Log("Submitted New Stats");
+
                 }
 
             }
@@ -220,23 +236,39 @@ public class MySqlDBConnection : MonoBehaviour
         string query = string.Empty;
         try
         {
-            query = "UPDATE statstbl SET highScore=?Score, kills = ?Kills, chestsCollected = ?Chests, time = ?Time, ballsFired = ?Fired WHERE userID = " + userIDVal;
+            query = "insertStats";
             if (con.State.ToString() != "Open")
                 con.Open();
             using (con)
             {
+                
                 using (cmd = new MySqlCommand(query, con))
                 {
-                    MySqlParameter scoreParam = cmd.Parameters.Add("?Score", MySqlDbType.VarChar);
-                    scoreParam.Value = DataHandler.getScore();
-                    MySqlParameter killsParam = cmd.Parameters.Add("?Kills", MySqlDbType.VarChar);
-                    killsParam.Value = DataHandler.getKills();
-                    MySqlParameter chestsParam = cmd.Parameters.Add("?Chests", MySqlDbType.VarChar);
-                    chestsParam.Value = DataHandler.getTreasure();
-                    MySqlParameter timeParam = cmd.Parameters.Add("?Time", MySqlDbType.VarChar);
-                    timeParam.Value = DataHandler.getTime();
-                    MySqlParameter firedParam = cmd.Parameters.Add("?Fired", MySqlDbType.VarChar);
-                    firedParam.Value = DataHandler.getShots();
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@ID", DataHandler.getID());
+
+                    cmd.Parameters.AddWithValue("@highScore", DataHandler.getScore());
+                    cmd.Parameters.AddWithValue("@kills", DataHandler.getKills());
+                    cmd.Parameters.AddWithValue("@timeSurvived", DataHandler.getTime());
+                    cmd.Parameters.AddWithValue("@ballsFired", DataHandler.getShots());
+                    cmd.Parameters.AddWithValue("@chestsCollected", DataHandler.getTreasure());
+
+                    //MySqlParameter scoreParam = cmd.Parameters.Add("?Score", MySqlDbType.VarChar);
+                    //scoreParam.Value = DataHandler.getScore();
+                    //MySqlParameter killsParam = cmd.Parameters.Add("?Kills", MySqlDbType.VarChar);
+                    //killsParam.Value = DataHandler.getKills();
+                    //MySqlParameter chestsParam = cmd.Parameters.Add("?Chests", MySqlDbType.VarChar);
+                    //chestsParam.Value = DataHandler.getTreasure();
+                    //MySqlParameter timeParam = cmd.Parameters.Add("?Time", MySqlDbType.VarChar);
+                    //timeParam.Value = DataHandler.getTime();
+                    //MySqlParameter firedParam = cmd.Parameters.Add("?Fired", MySqlDbType.VarChar);
+                    //firedParam.Value = DataHandler.getShots();
+
+                    Debug.Log(userIDVal);
+
+                    cmd.ExecuteNonQuery();
+
+                    Debug.Log("Finished Update Code");
 
                 }
 
@@ -264,36 +296,47 @@ public class MySqlDBConnection : MonoBehaviour
                     if (rdr.HasRows)
                     {
                         while (rdr.Read())
-                        {
+                        { 
+                            currentScore.gameObject.SetActive(true);
+                            currentScore.text = "Score: " + rdr["highScore"].ToString();
+                            currentKills.gameObject.SetActive(true);
+                            currentKills.text = "Enemies Defeated: "+ rdr["kills"].ToString();
+                            currentChests.gameObject.SetActive(true);
+                            currentChests.text = "Treasure Chests Collected: " + rdr["chestsCollected"].ToString();
+                            currentTime.gameObject.SetActive(true);
+                            currentTime.text = "Time Survived: " + rdr["time"].ToString() + " Seconds";
+                            currentShots.gameObject.SetActive(true);
+                            currentShots.text = "Cannonballs Fired: " + rdr["ballsFired"].ToString();
+
+
+
                             infoText.enabled = false;
-                            emailIn.enabled = false;
-                            passwordIn.enabled = false;
-                            loginButton.enabled = false;
+                            emailIn.gameObject.SetActive(false);
+                            passwordIn.gameObject.SetActive(false);
+                            loginButton.gameObject.SetActive(false);
 
-                            currentScore.enabled = true;
-                            currentScore.text = rdr["highScore"].ToString();
-                            currentKills.enabled = true;
-                            currentKills.text = rdr["kills"].ToString();
-                            currentChests.enabled = true;
-                            currentChests.text = rdr["chestsCollected"].ToString();
-                            currentTime.enabled = true;
-                            currentTime.text = rdr["time"].ToString();
-                            currentShots.enabled = true;
-                            currentShots.text = rdr["ballsFired"].ToString();
-
-                            currentStats.enabled = true;
-                            keepOldButton.enabled = true;
-                            submitNewButton.enabled = true;
+                            
+                            keepOldButton.gameObject.SetActive(true);
+                            submitNewButton.gameObject.SetActive(true);
                         }
                     }
                 }
-                    
+                rdr.Close();   
             }
         }
         catch(Exception ex)
         {
             Debug.Log(ex.ToString());
         }
+    }
+
+    void DisplayChange()
+    {
+        infoText.enabled = false;
+        emailIn.gameObject.SetActive(false);
+        passwordIn.gameObject.SetActive(false);
+        loginButton.gameObject.SetActive(false);
+        submitNewButton.gameObject.SetActive(true);
     }
 
     //public void getHashes()
