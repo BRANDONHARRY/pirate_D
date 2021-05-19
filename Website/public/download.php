@@ -113,9 +113,37 @@
                 Step 2:
             </h2>
             <p>
-                Click on the "Pirate Treasure" to go into the following:
+                Click on the green "Code" button this will display the popup below where you will want to click download ZIP:
             </p>
             <img src="../assets/img/step2.PNG" width="70%" height="70%" alt="banner">
+            <h2>
+                Step 3:
+            </h2>
+            <p>
+                Download the file to a location of your choice:
+            </p>
+            <img src="../assets/img/step3.PNG" width="70%" height="70%" alt="banner">
+            <h2>
+                Step 4:
+            </h2>
+            <p>
+                Extract the zipped file here like so:
+            </p>
+            <img src="../assets/img/step4.png" width="70%" height="70%" alt="banner">
+            <h2>
+                Step 5:
+            </h2>
+            <p>
+                Locate the "Pirate Treasure" and open it to find the game executable:
+            </p>
+            <img src="../assets/img/step5.png" width="70%" height="70%" alt="banner">
+            <h2>
+                Step 5:
+            </h2>
+            <p>
+                Once you have found this file you are able to open the game and play it as much as you desire!
+            </p>
+            <img src="../assets/img/step6.png" width="70%" height="70%" alt="banner">
         </div>
 
         <footer class="footer">

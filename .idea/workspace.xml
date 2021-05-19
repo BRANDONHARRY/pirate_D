@@ -26,15 +26,15 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="55a90b99-f2c2-4e2a-b5a2-fc6ca339c588" name="Default Changelist" comment="Accessibility issues have been fixed. Overall just making the compatibility of the website is accessible to all users.">
-      <change afterPath="$PROJECT_DIR$/Website/assets/img/step1.PNG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Website/assets/img/step2.PNG" afterDir="false" />
+    <list default="true" id="55a90b99-f2c2-4e2a-b5a2-fc6ca339c588" name="Default Changelist" comment="Small improvements.">
+      <change afterPath="$PROJECT_DIR$/Website/assets/img/step3.PNG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Website/assets/img/step4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Website/assets/img/step5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Website/assets/img/step6.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Website/public/contact_us.php" beforeDir="false" afterPath="$PROJECT_DIR$/Website/public/contact_us.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Website/assets/img/step1.PNG" beforeDir="false" afterPath="$PROJECT_DIR$/Website/assets/img/step1.PNG" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Website/assets/img/step2.PNG" beforeDir="false" afterPath="$PROJECT_DIR$/Website/assets/img/step2.PNG" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Website/public/download.php" beforeDir="false" afterPath="$PROJECT_DIR$/Website/public/download.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Website/public/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/Website/public/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Website/public/leaderboard.php" beforeDir="false" afterPath="$PROJECT_DIR$/Website/public/leaderboard.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Website/public/news.php" beforeDir="false" afterPath="$PROJECT_DIR$/Website/public/news.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -137,7 +137,8 @@
       <workItem from="1620487384770" duration="1593000" />
       <workItem from="1621348057832" duration="111000" />
       <workItem from="1621419517630" duration="5494000" />
-      <workItem from="1621438129047" duration="5070000" />
+      <workItem from="1621438129047" duration="5121000" />
+      <workItem from="1621451288978" duration="1649000" />
     </task>
     <task id="LOCAL-00001" summary="Website file structure">
       <created>1605104557576</created>
@@ -321,7 +322,14 @@
       <option name="project" value="LOCAL" />
       <updated>1621425026857</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="Small improvements.">
+      <created>1621445246041</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1621445246041</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -353,7 +361,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Website file structure" />
     <MESSAGE value="added photos" />
     <MESSAGE value="php page been made" />
     <MESSAGE value="php test website" />
@@ -378,7 +385,8 @@
     <MESSAGE value="Register page now uses new stored procedure that will automatically hash the password in the procedure. Meaning no php hash function is used.&#10;&#10;The login page has now been updated to use the new login stored procedure that will verify if the email is valid if so will check the password." />
     <MESSAGE value="Resetting the password now uses a newly created stored procedure that will again automatically hash the password." />
     <MESSAGE value="Accessibility issues have been fixed. Overall just making the compatibility of the website is accessible to all users." />
-    <option name="LAST_COMMIT_MESSAGE" value="Accessibility issues have been fixed. Overall just making the compatibility of the website is accessible to all users." />
+    <MESSAGE value="Small improvements." />
+    <option name="LAST_COMMIT_MESSAGE" value="Small improvements." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
